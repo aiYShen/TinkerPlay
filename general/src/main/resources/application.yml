@@ -210,6 +210,9 @@ elasticsearch:
     port: 9200
       
 management:
+  health:
+    elasticsearch:
+      enabled: false
   endpoints:
     web:
       exposure:
@@ -271,13 +274,6 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
-
-data:
-  elasticsearch:
-    repositories:
-      enabled: true
-    cluster-nodes: 192.168.1.7:9300 # es的连接地址及端口号
-    cluster-name: elasticsearch # es集群的名称
 
 minio:
   endpoint: http://192.168.0.107:9095 #MinIO服务所在地址

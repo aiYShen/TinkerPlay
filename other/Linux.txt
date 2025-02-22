@@ -421,3 +421,14 @@ brew switch <package> <version>
 brew cleanup
 brew cleanup --prune=all
 brew autoremove
+
+docker run --name elasticsearch \
+  --restart always \
+  -p 9200:9200 \
+  -p 9300:9300 \
+  -v /mydata/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
+  -v /mydata/elasticsearch/logs:/usr/share/elasticsearch/logs \
+  -v /mydata/elasticsearch/data:/usr/share/elasticsearch/data \
+  -v /mydata/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
+  -e "discovery.type=single-node" \
+  -d elasticsearch:7.17.3
