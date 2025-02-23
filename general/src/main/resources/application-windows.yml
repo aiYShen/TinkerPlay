@@ -57,7 +57,7 @@ spring:
   # 文件上传功能开启
   servlet:
     multipart:
-      location: E:\aiyuns\Temp
+      location: /Users/yuxinbai/aiyuns/Test/Temp
 
 # RES加密默认密钥(对应属性类EncryptProperties中的@ConfigurationProperties(prefix = "body.encrypt")的key属性)
 body:
@@ -65,7 +65,7 @@ body:
     key: iamwalkerencrypt
 
 # 文件上传位置
-file-save-path: E:\aiyuns\uploadFile\
+file-save-path: /Users/yuxinbai/aiyuns/uploadFile/
 
 mybatis:
   configuration:
@@ -80,10 +80,7 @@ logging:
 pdf:
   config:
     # pdf输出位置
-    output: E:\aiyuns\uploadFile\pdf\
-
-minio:
-  endpoint: http://localhost:9095 #MinIO服务所在地址
+    output: /Users/yuxinbai/aiyuns/uploadFile/pdf
 
 # jwt加密TOKEN_SECRET
 token:
