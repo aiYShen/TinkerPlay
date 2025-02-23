@@ -74,5 +74,5 @@
     </logger>
     <logger name="org.springframework.data.elasticsearch.client.WIRE" level="TRACE">
         <appender-ref ref="ES"/>
-    </logger>>
+    </logger>
 </configuration>
