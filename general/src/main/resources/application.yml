@@ -276,7 +276,7 @@ pagehelper:
   params: count=countSql
 
 minio:
-  endpoint: http://192.168.0.107:9095 #MinIO服务所在地址
+  endpoint: http://192.168.1.8:9095 #MinIO服务所在地址
   bucketName: baiyx #存储桶名称
   accessKey: minioadmin #访问的账号
   secretKey: ENC(SD4Ucjs348Zl+nhypn1jZZop5Smktw2y) #访问的密码
