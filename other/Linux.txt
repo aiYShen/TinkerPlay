@@ -432,3 +432,6 @@ docker run --name elasticsearch \
   -v /mydata/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
   -e "discovery.type=single-node" \
   -d elasticsearch:7.17.3
+
+  激活虚拟环境: source ~/transformers_env/bin/activate
+  退出虚拟环境: deactivate
