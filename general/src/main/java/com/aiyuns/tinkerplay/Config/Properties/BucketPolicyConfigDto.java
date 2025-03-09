@@ -1,4 +1,4 @@
-package com.aiyuns.tinkerplay.Config;
+package com.aiyuns.tinkerplay.Config.Properties;
 
 import lombok.Builder;
 import lombok.Data;

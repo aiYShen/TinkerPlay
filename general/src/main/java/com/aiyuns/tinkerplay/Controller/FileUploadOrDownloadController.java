@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONUtil;
 import com.aiyuns.tinkerplay.Common.CommonResult;
 import com.aiyuns.tinkerplay.Common.MinioUploadDto;
-import com.aiyuns.tinkerplay.Config.BucketPolicyConfigDto;
+import com.aiyuns.tinkerplay.Config.Properties.BucketPolicyConfigDto;
 import com.aiyuns.tinkerplay.Config.MinioClientConfig;
 import com.aiyuns.tinkerplay.Controller.Service.UserService;
 import com.aiyuns.tinkerplay.Entity.QueryRequestVo;
