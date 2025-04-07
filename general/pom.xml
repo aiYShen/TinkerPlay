@@ -757,7 +757,7 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.45.1</version>
+                <version>0.46.0</version>
                 <executions>
                     <!--如果想在项目打包时构建镜像添加-->
                     <execution>
