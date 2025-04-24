@@ -81,42 +81,42 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-swt</artifactId>
-            <version>21.0.3</version>
+            <version>21.0.7</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx.base</artifactId>
-            <version>21.0.3</version>
+            <version>21.0.7</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx.controls</artifactId>
-            <version>21.0.3</version>
+            <version>21.0.7</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx.fxml</artifactId>
-            <version>21.0.3</version>
+            <version>21.0.7</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx.graphics</artifactId>
-            <version>21.0.3</version>
+            <version>21.0.7</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx.media</artifactId>
-            <version>21.0.3</version>
+            <version>21.0.7</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx.swing</artifactId>
-            <version>21.0.3</version>
+            <version>21.0.7</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx.web</artifactId>
-            <version>21.0.3</version>
+            <version>21.0.7</version>
         </dependency>
         <!-- 图像和视频处理库 -->
         <dependency>
