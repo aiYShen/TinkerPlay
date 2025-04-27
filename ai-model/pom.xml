@@ -169,11 +169,21 @@
             <artifactId>tokenizers</artifactId>
             <version>${djl.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.microsoft.onnxruntime</groupId>
             <artifactId>onnxruntime</artifactId>
             <version>1.20.0</version>
+        </dependency>
+        <!-- 图表库 -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jcommon</artifactId>
+            <version>1.0.24</version>
         </dependency>
     </dependencies>
     <!-- Maven Enforcer: Ensures user has an up to date version of Maven before building -->
