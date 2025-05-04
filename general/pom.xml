@@ -777,8 +777,10 @@
                 <configuration>
                     <!-- Docker 远程管理地址-->
                     <dockerHost>http://${my.ip}:12375</dockerHost>
+<!--                    <dockerHost>http://192.168.1.7:2375</dockerHost>-->
                     <!-- Docker 推送镜像仓库地址-->
                     <pushRegistry>http://${my.ip}:15000</pushRegistry>
+<!--                    <pushRegistry>192.168.1.7:5000</pushRegistry>-->
                     <!-- 认证信息-->
                     <authConfig>
                         <push>
