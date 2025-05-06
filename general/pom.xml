@@ -59,7 +59,7 @@
         <dependency>
             <groupId>com.github.jsqlparser</groupId>
             <artifactId>jsqlparser</artifactId>
-            <version>5.1</version>
+            <version>5.2</version>
         </dependency>
         <!--ArcGIS dependencies -->
         <dependency>
@@ -473,17 +473,17 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.8.6</version>
+            <version>2.8.8</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
-            <version>2.8.6</version>
+            <version>2.8.8</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-            <version>2.8.6</version>
+            <version>2.8.8</version>
         </dependency>
         <!-- 服务启动时自动升级内置的SQL脚本 -->
         <!-- 支持低数据库5.7版本 -->
