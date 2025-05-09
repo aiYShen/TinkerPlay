@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 脚本名称: call_multiple_springboot_apis.sh
-# 功能: 定时调用多个Spring Boot接口并记录日志
+# 功能: 定时调用多个Spring Boot接口，详细记录每个接口的请求和返回结果到日志
 
 # 日志文件路径
 LOG_FILE="/var/log/springboot_multi_api_call.log"
@@ -40,6 +40,12 @@ call_api() {
     local attempt=1
     local curl_cmd
 
+    # 记录请求信息
+    log "Request: $method $url"
+    if [ -n "$body" ]; then
+        log "Request Body: $body"
+    fi
+
     # 构造curl命令
     if [ "$method" = "POST" ]; then
         curl_cmd="curl -s -m $TIMEOUT -X POST -H 'Content-Type: application/json' -d '$body' '$url'"
@@ -48,15 +54,20 @@ call_api() {
     fi
 
     while [ $attempt -le $RETRY_COUNT ]; do
-        log "Attempt $attempt: Calling $method API at $url"
+        log "Attempt $attempt of $RETRY_COUNT"
         RESPONSE=$(eval "$curl_cmd -w '%{http_code}' -o /tmp/api_response.txt" 2>> "$LOG_FILE")
         HTTP_CODE="${RESPONSE: -3}"  # 提取HTTP状态码
+        RESPONSE_BODY=$(cat /tmp/api_response.txt)
 
-        if [ "$HTTP_CODE" -eq 200 ]; then
-            log "Success: HTTP $HTTP_CODE, Response: $(cat /tmp/api_response.txt)"
+        # 记录响应信息
+        log "Response: HTTP $HTTP_CODE"
+        log "Response Body: $RESPONSE_BODY"
+
+        if     if [ "$HTTP_CODE" -eq 200 ]; then
+            log "Success: API call completed"
             return 0
         else
-            log "Failed: HTTP $HTTP_CODE, Response: $(cat /tmp/api_response.txt)"
+            log "Failed: API call unsuccessful"
             if [ $attempt -lt $RETRY_COUNT ]; then
                 log "Retrying after $RETRY_DELAY seconds..."
                 sleep $RETRY_DELAY
@@ -75,11 +86,13 @@ EXIT_CODE=0
 # 遍历调用所有接口
 for api in "${API_CALLS[@]}"; do
     IFS='|' read -r method url body <<< "$api"
+    log "--------------------------------"
     log "Processing $method request to $url"
     call_api "$method" "$url" "$body"
     if [ $? -ne 0 ]; then
         EXIT_CODE=1
     fi
+    log "--------------------------------"
 done
 
 # 清理临时文件
