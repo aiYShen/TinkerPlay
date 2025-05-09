@@ -55,15 +55,44 @@ call_api() {
 
     while [ $attempt -le $RETRY_COUNT ]; do
         log "Attempt $attempt of $RETRY_COUNT"
+        # 执行curl并捕获状态码
         RESPONSE=$(eval "$curl_cmd -w '%{http_code}' -o /tmp/api_response.txt" 2>> "$LOG_FILE")
-        HTTP_CODE="${RESPONSE: -3}"  # 提取HTTP状态码
-        RESPONSE_BODY=$(cat /tmp/api_response.txt)
+        if [ $? -ne 0 ]; then
+            log "Error: curl command failed"
+            RESPONSE_BODY=$(cat /tmp/api_response.txt 2>/dev/null || echo "No response")
+            log "Response Body: $RESPONSE_BODY"
+            ((attempt++))
+            if [ $attempt -le $RETRY_COUNT ]; then
+                log "Retrying after $RETRY_DELAY seconds..."
+                sleep $RETRY_DELAY
+            fi
+            continue
+        fi
+
+        # 提取HTTP状态码
+        HTTP_CODE="${RESPONSE: -3}"
+        log "DEBUG: HTTP_CODE=$HTTP_CODE"  # 调试输出
+
+        # 验证HTTP_CODE是否为数字
+        if [[ ! "$HTTP_CODE" =~ ^[0-9]+$ ]]; then
+            log "Error: Invalid HTTP_CODE, not a number: '$HTTP_CODE'"
+            RESPONSE_BODY=$(cat /tmp/api_response.txt 2>/dev/null || echo "No response")
+            log "Response Body: $RESPONSE_BODY"
+            ((attempt++))
+            if [ $attempt -le $RETRY_COUNT ]; then
+                log "Retrying after $RETRY_DELAY seconds..."
+                sleep $RETRY_DELAY
+            fi
+            continue
+        fi
+
+        RESPONSE_BODY=$(cat /tmp/api_response.txt 2>/dev/null || echo "No response")
 
         # 记录响应信息
         log "Response: HTTP $HTTP_CODE"
         log "Response Body: $RESPONSE_BODY"
 
-        if     if [ "$HTTP_CODE" -eq 200 ]; then
+        if [ "$HTTP_CODE" -eq 200 ]; then
             log "Success: API call completed"
             return 0
         else
