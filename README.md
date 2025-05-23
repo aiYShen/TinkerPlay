@@ -103,7 +103,7 @@ JAVA_21 + springboot_3.4.6 + mybatis_3.5.19 + redis_7.0.9 + rabbitmq_3.11.10 + E
 54. 尝试玩下地理信息相关的Java开源包及前端开发包(com.esri.arcgisruntim, org.geotools, org.gdal, org.locationtech.jts, JavaFX)
 55. 优化项目结构:模块化-新增flink- job模块, 方便单独打包
 56. Spring Ai 1.0.0正式版发布,尝试集成并学习使用它
-7...............................
+57. ..............................
 
 #### 部署内容
 Linux:
