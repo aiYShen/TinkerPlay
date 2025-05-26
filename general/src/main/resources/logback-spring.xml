@@ -1,108 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration>
 <configuration>
-    <!--    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>-->
-    <!--    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>-->
-    <!-- %m输出的信息,%p日志级别,%t线程名,%d日期,%c类的全名,%i索引【从数字0开始递增】,,, -->
-    <!-- appender是configuration的子节点，是负责写日志的组件。 -->
-    <!-- ConsoleAppender：把日志输出到控制台 -->
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d %p (%file:%line\)- %m%n</pattern>
-            <!-- 控制台也要使用UTF-8，不要使用GBK，否则会中文乱码 -->
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
-    <!--应用名称-->
-    <property name="APP_NAME" value="TinkerPlay"/>
-    <!--日志文件保存路径-->
+    <property name="APP_NAME" value="TinkerPlay" />
     <property name="LOG_FILE_PATH" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/logs}"/>
     <springProperty name="MY_IP" source="my.ip"/>
     <springProperty name="MY_PORT" source="my.port"/>
-    <contextName>${APP_NAME}</contextName>
-    <!--每天记录日志到文件appender-->
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>./logs/${APP_NAME}/${APP_NAME}-all.log</file>
-        <!-- rollingPolicy:当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名。 -->
-        <!-- TimeBasedRollingPolicy： 最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 活动文件的名字会根据fileNamePattern的值，每隔一段时间改变一次 -->
-            <!-- 文件名：logs/TinkerPlay/TinkerPlay-all.2017-12-05.0.log -->
-            <fileNamePattern>./logs/${APP_NAME}/%d/${APP_NAME}-all.%d.%i.log</fileNamePattern>
-            <!-- 每产生一个日志文件，该日志文件的保存期限为7天 -->
-            <maxHistory>7</maxHistory>
-            <totalSizeCap>10MB</totalSizeCap>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <!-- maxFileSize:这是活动文件的大小，默认值是10MB,设置为1M -->
-                <maxFileSize>1MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-        <append>true</append>
-        <!-- pattern节点，用来设置日志的输入格式 -->
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <!-- 格式化输出: %d表示日期, %thread表示线程名, %-5level: 级别从左往右显示5个字符宽度, %msg: 日志消息, %n是换行符 -->
-            <pattern>
-                %date{yyyy-MM-dd HH:mm:ss:SSS}|%-5level|%thread|%method:%line|%logger|%msg%n
-            </pattern>
-            <!-- 记录日志的编码 -->
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %p (%file:%line\)- %m%n</pattern>
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n</pattern>-->
             <charset>UTF-8</charset>
         </encoder>
     </appender>
-    <!--输出到logstash的appender-->
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>./logs/${APP_NAME}/%d/${APP_NAME}-all.%d.%i.log</fileNamePattern>
+<!--            <fileNamePattern>${LOG_FILE_PATH}/${APP_NAME}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
+            <maxFileSize>1MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>10MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%date{yyyy-MM-dd HH:mm:ss:SSS}|%-5level|%thread|%method:%line|%logger|%msg%n</pattern>
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n</pattern>-->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
     <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <!--可以访问的logstash日志收集端口-->
-        <destination>${MY_IP}:${MY_PORT}</destination>
+        <destination>192.168.1.7:4560</destination>
+<!--        <destination>${MY_IP}:${MY_PORT}</destination>-->
         <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
+
     <appender name="ES" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件路径 -->
         <file>./logs/${APP_NAME}/es-all.log</file>
-        <!-- rollingPolicy:当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名。 -->
-        <!-- TimeBasedRollingPolicy： 最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 活动文件的名字会根据fileNamePattern的值，每隔一段时间改变一次 -->
-            <!-- 文件名：logs/TinkerPlay/TinkerPlay-all.2017-12-05.0.log -->
-            <fileNamePattern>./logs/${APP_NAME}/%d/es-all.%d.%i.log</fileNamePattern>
-            <!-- 每产生一个日志文件，该日志文件的保存期限为7天 -->
+        <!-- 滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 滚动文件命名模式 -->
+            <fileNamePattern>./logs/${APP_NAME}/es-all.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 单个文件的最大大小 -->
+            <maxFileSize>1MB</maxFileSize>
+            <!-- 日志保留历史天数 -->
             <maxHistory>7</maxHistory>
+            <!-- 总日志大小上限 -->
             <totalSizeCap>10MB</totalSizeCap>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <!-- maxFileSize:这是活动文件的大小，默认值是10MB,设置为1M -->
-                <maxFileSize>1MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
+        <!-- 文件追加 -->
         <append>true</append>
-        <!-- pattern节点，用来设置日志的输入格式 -->
+        <!-- 日志格式 -->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <!-- 格式化输出: %d表示日期, %thread表示线程名, %-5level: 级别从左往右显示5个字符宽度, %msg: 日志消息, %n是换行符 -->
             <pattern>
                 %date{yyyy-MM-dd HH:mm:ss:SSS}|%-5level|%thread|%method:%line|%logger|%msg%n
             </pattern>
-            <!-- 记录日志的编码 -->
             <charset>UTF-8</charset>
         </encoder>
     </appender>
+
     <root>
-        <!-- 日志输出级别 -->
         <level value="INFO" />
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="CONSOLE" />
         <appender-ref ref="LOGSTASH"/>
     </root>
-    <!-- 指定项目中某个包，当有日志操作行为时的日志记录级别 -->
-    <!-- com.aiyuns.tinkerplay，也就是只要是发生在这个根包下面的所有日志操作行为的权限都是DEBUG -->
-    <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
+
     <logger name="com.aiyuns.tinkerplay" level="DEBUG" additivity="true">
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="FILE" />
     </logger>
     <logger name="com.aiyuns.tinkerplay.Entity" level="TRACE" additivity="true">
         <appender-ref ref="FILE"/>
     </logger>
-<!--    <logger name="org.mybatis" level="TRACE">-->
-<!--        <appender-ref ref="FILE"/>-->
-<!--    </logger>-->
     <logger name="org.springframework.data.elasticsearch.client.WIRE" level="TRACE">
         <appender-ref ref="ES"/>
-    </logger>>
-    <!--<logger level="DEBUG">-->
-    <!--<appender-ref ref="FILE"/>-->
-    <!--</logger>-->
+    </logger>
 </configuration>

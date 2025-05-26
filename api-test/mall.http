@@ -1,0 +1,121 @@
+# mall
+
+###
+# @name 用户注册_register
+POST http://localhost:8080/admin/register
+Content-Type: application/json
+
+{
+  "username": "xxxxx",
+  "password": "xxxxxxxx"
+}
+
+
+
+
+###
+# @name 登录以后返回_token_login
+POST http://localhost:8080/admin/login
+Content-Type: application/json
+
+{
+  "username": "xxxxx",
+  "password": "xxxxxxxx"
+}
+
+
+
+###
+# @name 刷新token_refreshToken
+GET http://localhost:8080/admin/refreshToken
+tokenHead: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYWl5eCxIsImNyZWF0ZWQiOjE2NzYzNTIyNTI1MDIsImV4cCI6MTY3Njk1NzA1Mn0.mSba7QYqleBbHshf10I1-XXGmaSnzPBFmPvXTME1Fpd_q0-Rc_Pv-jMFIKsbja_rHl6dLNQgVrOyz-87uV54Lw
+Content-Type: application/json
+
+{
+  "tokenHead": "eyJhbGciOixJIUzUxMiJ9.eyJzdWIiOiJiYWl5eCIsImNyZWF0ZWQiOjE2NzYzNTIyNTI1MDIsImV4cCI6MTY3Njk1NzA1Mn0.mSba7QYqleBbHshf10I1-XXGmaSnzPBFmPvXTME1Fpd_q0-Rc_Pv-jMFIKsbja_rHl6dLNQgVrOyz-87uV54Lw",
+  "token": ""
+}
+
+###
+# @name 删除指定用户信息_delete/{id}
+POST http://localhost:8080/admin/delete/11
+tokenHead: Bearer eyJhbGciOiJIUxzUxMiJ9.eyJzdxWIiOiJiYWl5eCIsImNyZWF0ZWQiOjE2NzYzNTIyNTI1MDIsImV4cCI6MTY3Njk1NzA1Mn0.mSba7QYqleBbHshf10I1-XXGmaSnzPBFmPvXTME1Fpd_q0-Rc_Pv-jMFIKsbja_rHl6dLNQgVrOyz-87uV54Lw
+
+###
+# @name 获取验证码_getAuthCode
+GET http://localhost:8085/sso/getAuthCode?
+    telephone=xxxxxxxxxxx
+
+###
+# @name 会员注册_register
+POST http://localhost:8085/sso/register
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="username"
+
+xxxxx
+--WebAppBoundary
+Content-Disposition: form-data; name="password"
+
+xxxxxxxx
+--WebAppBoundary
+Content-Disposition: form-data; name="telephone"
+
+xxxxxxxxxxx
+--WebAppBoundary
+Content-Disposition: form-data; name="authCode"
+
+xxxxxx
+--WebAppBoundary
+
+###
+# @name 会员登录_login
+POST http://localhost:8085/sso/login
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="username"
+
+xxxxx
+--WebAppBoundary
+Content-Disposition: form-data; name="password"
+
+xxxxxxxx
+--WebAppBoundary
+
+###
+# @name 会员修改密码_updatePassword
+POST http://localhost:8085/sso/updatePassword
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="telephone"
+
+xxxxxxxxxxx
+--WebAppBoundary
+Content-Disposition: form-data; name="password"
+
+xxxxxxxx
+--WebAppBoundary
+Content-Disposition: form-data; name="authCode"
+
+xxxxxx
+--WebAppBoundary
+
+###
+# @name 根据购物车信息生成订单_generateOrder
+POST http://localhost:8085/order/generateOrder
+tokenHead: Bearer
+token: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYWl5eCIsIxmNyZWF0ZWQiOjE2NzY4NjExMTQ1ODIsImV4cCI6MTY3NzQ2NTkxNH0.sSknkpuwSeSBdIsx0CoWy4kk1GrajsH6wRM4o0X6FVY3qeH4OC0VMnGIGlJj4O4sAyN7ig8lbllDG8rw3GPEDQ
+Content-Type: application/json
+
+{
+  "cartIds": [
+    16
+  ],
+  "couponId": null,
+  "memberReceiveAddressId": 3,
+  "payType": 0,
+  "useIntegration": 0
+}

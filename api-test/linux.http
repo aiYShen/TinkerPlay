@@ -1,0 +1,136 @@
+# linux
+
+###
+# @name findAll
+GET http://192.168.1.7:1001/api/userController/findAll
+
+###
+# @name findByTime
+POST http://192.168.1.7:1001/api/userController/findByTime
+Content-Type: application/json
+
+{
+  "startTime": "1993-01-01",
+  "endTime": "1997-12-31"
+}
+
+###
+# @name insertOne
+POST http://192.168.1.7:1001/api/userController/insertOne
+Content-Type: application/json
+
+YKPcUoTHWbsaTBQvWmDnMN9dD/IMQ2HgRFxSrashOHTilkGxEhjRKauYghj/WPfRXbkaeCzMFJSynuKNBXv06uKSvm5lB2YN/8omXEBHmkBZMsAiymDchlN3VHfYNvWYd
+
+###
+# @name findByName
+POST http://192.168.1.7:1001/api/userController/findByName
+Content-Type: application/json
+
+{
+  "user": {
+    "username": "姓名10"
+  }
+}
+
+###
+# @name findById
+POST http://192.168.1.7:1001/api/userController/findById?
+=null
+Content-Type: application/json
+
+{
+  "user": {
+    "id": 10
+  }
+}
+
+###
+# @name removeESC
+POST http://192.168.1.7:1001/api/userController/removeESC
+
+###
+# @name MQ延时删除信息
+POST http://192.168.1.7:1001/api/userController/insertOne2
+Content-Type: application/json
+
+YKPcUoTHWbsaTBQvWmDnMN9dD/IMQ2HgRFxSrashOHTilkGxEkjRKauYghj/WPfRXbkaeCzMFJSynuKNBXv06uKSvm5lB2YN/8omXEBHmkBZMsAiymDchlN3VHfYNvWYd
+
+###
+# @name findBypaging1
+GET http://192.168.1.7:1001/api/ProjbaseController/findBypaging1?
+    pageNum=139&
+    pageSize=15
+
+###
+# @name findBypaging2
+GET http://192.168.1.7:1001/api/ProjbaseController/findBypaging2?
+    pageNum=15&
+    pageSize=5
+
+###
+# @name deleteByName
+POST http://192.168.1.7:1001/api/userController/deleteByName?
+    username=姓名10
+Content-Type: application/json
+
+{
+  "user": {
+    "username": "姓名10"
+  }
+}
+
+###
+# @name Nacos配置中心Test_getConfigInfo
+GET http://192.168.1.7:1001/api/nacos/getConfigInfo
+
+###
+# @name queryAllFileById
+POST http://192.168.1.7:1001/api/queryAllFileById
+
+###
+# @name download
+GET http://192.168.1.7:1001/api/download/17
+
+###
+# @name preview
+GET http://192.168.1.7:1001/api/preview/17
+
+###
+# @name delete
+POST http://192.168.1.7:1001/api/deleteFile
+Content-Type: application/json
+
+{
+  "objectName": "20230609/xxxxxxxxxx(1).doc"
+}
+
+###
+# @name findAll2
+GET http://192.168.1.7:1001/api/userController/findAll2
+
+###
+# @name recursion
+GET http://192.168.1.7:1001/api/userController/recursion?
+    path=/Test&
+    searchContent=1694165799628.pdf
+
+###
+# @name CreatePDF
+GET http://192.168.1.7:1001/api/CreatePDF/2
+
+###
+# @name getAuthCode
+POST http://192.168.1.7:1001/api/RedisController/getAuthCode
+Content-Type: application/json
+
+{
+  "phoneNumbers": [
+    "1xx4xxxxxxx"
+  ],
+  "templateId": "xxxxxx",
+  "smsSign": "xxxxxxxxxxxx"
+}
+
+###
+# @name downloadexcel
+GET http://192.168.1.7:1001/api/userController/downloadexcel

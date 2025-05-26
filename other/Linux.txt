@@ -383,3 +383,57 @@ sudo docker run -d --name clickhouse-server \
 --restart unless-stopped \
 
 clickhouse启动: clickhouse-server
+
+brew --version
+brew update
+brew upgrade
+brew doctor
+brew --prefix
+brew search <package>
+brew install <package>
+brew uninstall <package>
+brew reinstall <package>
+brew list
+brew info <package>
+brew deps <package>
+brew cleanup
+brew services start <service>
+brew services stop <service>
+brew services restart <service>
+brew services list
+sudo chown -R $(whoami) /usr/local/*
+brew deps --tree <package>
+brew link --overwrite <package>
+brew unlink <package>
+brew list --versions
+brew missing
+brew list <package>
+brew tap
+brew tap <user/repo>
+brew untap <user/repo>
+brew search <user/repo>
+brew search --cask <app>
+brew install --cask <app>
+brew uninstall --cask <app>
+brew list --cask
+brew log <package>
+brew switch <package> <version>
+brew cleanup
+brew cleanup --prune=all
+brew autoremove
+
+docker run --name elasticsearch \
+  --restart always \
+  -p 9200:9200 \
+  -p 9300:9300 \
+  -v /mydata/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
+  -v /mydata/elasticsearch/logs:/usr/share/elasticsearch/logs \
+  -v /mydata/elasticsearch/data:/usr/share/elasticsearch/data \
+  -v /mydata/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
+  -e "discovery.type=single-node" \
+  -d elasticsearch:7.17.3
+
+ 激活虚拟环境: source ~/transformers_env/bin/activate
+ 退出虚拟环境: deactivate
+
+ java虚拟机生成内存转储文件: jmap -F -dump:live,format=b,file=heap.hprof 进程ID

@@ -1,0 +1,301 @@
+# localhost
+
+###
+# @name findAll
+GET http://localhost:9366/api/userController/findAll
+
+###
+# @name findById
+POST http://localhost:9366/api/userController/findById?
+=null
+Content-Type: application/json
+
+{
+  "user": {
+    "id": 10
+  }
+}
+
+###
+# @name insertOne
+POST http://localhost:9366/api/userController/insertOne
+Content-Type: application/json
+
+YKPcUoTHWbsaTBQvWmDnMN9dD/IMQ2HgRFxSrashOHTilkGxEjRxKauYghj/WPfRXbkaeCzMFJSynuKNBXv06uKSvm5lB2YN/8omXEBHmkBZMsAiymDchlN3VHfYNvWYd
+
+###
+# @name deleteByName
+POST http://localhost:9366/api/userController/deleteByName?
+    username=姓名10
+Content-Type: application/json
+
+{
+  "user": {
+    "username": "姓名10"
+  }
+}
+
+###
+# @name updateOne
+POST http://localhost:9366/api/userController/updateOne
+Content-Type: application/json
+
+{
+  "user": {
+    "id": 20,
+    "username": "鸦鸦",
+    "address": "x江",
+    "sex": "男",
+    "birthday": "1990-02-19"
+  }
+}
+
+###
+# @name findByName
+POST http://localhost:9366/api/userController/findByName
+Content-Type: application/json
+
+{
+  "user": {
+    "username": "姓名10"
+  }
+}
+
+###
+# @name findByTime
+POST http://localhost:9366/api/userController/findByTime
+Content-Type: application/json
+
+{
+  "startTime": "1993-01-01",
+  "endTime": "1997-12-31"
+}
+
+###
+# @name RowConvertCol
+POST http://localhost:9366/api/userController/RowConvertCol
+Content-Type: application/json
+
+{
+  "user": {
+    "id": 93,
+    "username": "李xx",
+    "address": "x江",
+    "sex": "男",
+    "birthday": "1995-06-11"
+  }
+}
+
+###
+# @name insertAll
+POST http://localhost:9366/api/userController/insertAll
+Content-Type: application/json
+
+[
+  {
+    "id": 11,
+    "username": "姓名11",
+    "address": "地址11",
+    "sex": "女",
+    "birthday": "1993-02-18"
+  },
+  {
+    "id": 12,
+    "username": "姓名12",
+    "address": "地址12",
+    "sex": "男",
+    "birthday": "1993-02-18"
+  },
+  {
+    "id": 13,
+    "username": "姓名13",
+    "address": "地址13",
+    "sex": "女",
+    "birthday": "1993-02-18"
+  },
+  {
+    "id": 14,
+    "username": "姓名14",
+    "address": "地址14",
+    "sex": "男",
+    "birthday": "1993-02-18"
+  },
+  {
+    "id": 15,
+    "username": "姓名15",
+    "address": "地址15",
+    "sex": "女",
+    "birthday": "1993-02-18"
+  },
+  {
+    "id": 16,
+    "username": "姓名16",
+    "address": "地址16",
+    "sex": "男",
+    "birthday": "1993-02-18"
+  },
+  {
+    "id": 17,
+    "username": "姓名17",
+    "address": "地址17",
+    "sex": "女",
+    "birthday": "1993-02-18"
+  },
+  {
+    "id": 18,
+    "username": "姓名18",
+    "address": "地址18",
+    "sex": "男",
+    "birthday": "1993-02-18"
+  },
+  {
+    "id": 19,
+    "username": "姓名19",
+    "address": "地址19",
+    "sex": "女",
+    "birthday": "1993-02-18"
+  },
+  {
+    "id": 20,
+    "username": "姓名20",
+    "address": "地址20",
+    "sex": "男",
+    "birthday": "1993-02-18"
+  }
+]
+
+
+###
+# @name downloadexcel
+GET http://localhost:9366/api/userController/downloadexcel
+
+###
+# @name getIPorMACaddress
+POST http://localhost:9366/api/userController/getIPorMACaddress
+
+###
+# @name removeESC
+POST http://localhost:9092/api/userController/removeESC
+
+###
+# @name AccessControl
+POST http://localhost:9366/api/AccessControl/check
+Content-Type: application/json
+
+{
+  "token": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbxnRfaWQiOiIzMyIsInVzZXJfdGVsIjoiIiwidXNlcl9uYW1lIjoicXQtaHkxIiwidG9rZW5fcHdkX3N0cm9uZ19mbGFnIjoiMSIsImF1dGhvcml0aWVzIjpbIkRFTEVURSMvKioiLCJQT1NUIy8qKiIsIkdFVCMvKioiLCJQVVQjLyoqIl0sInVzZXJfaWRfbnVtYmVyIjoiIiwiY2xpZW50X2lkIjoiZ2lzcS02MmM2NGNkZS02NmZlLTExZTktOTM3YS0yYzRkNTRmMDFiYTQiLCJ1c2VyX2tpbmQiOjEsInRlbmFudF91aWQiOiI3MzNlNTI2ZS1jZDI5LTExZWMtOWU3OC0wMjQyMTBkOGE5ZjMiLCJ1c2VyX2lkIjoiOTkwY2QxMTItMDc3YS00ZjBiLThkYTktNjZlMjQ5Mzk1OTViIiwic2NvcGUiOlsiYWxsIl0sInVzZXJfbmlja25hbWUiOiLkvZXotZ8iLCJ0b2tlbl9wd2Rfb3ZlcmR1ZV9mbGFnIjoiMSIsImV4cCI6MTY1OTk3NDY1MSwianRpIjoiNTYxNzZjYTgtMWY2Ni00MzUzLWEwMDktZTVlMWI1NzJhZmI5In0.mUaeLwj6HdLtyMy3hbducirjAGX8_kvOR-Qhlbu6dTqf_QqqefWhYKOxAfixjza39rKkJtF6rmad3zrmsxJD_FMnLbO6DcLuJ9CaluQ2liAsXtjFdd1dAfnNLfK5ZqKWjCc0GlaTCooPu6f0ajxT3kGfYXFyWm8Pj8Pi0CDJ8durd_iJZMfCmHwEZ-bBKLbPNnC1BnIqOdHwiE6-RyYzxnkc7m2_gBkFCBSioASUaWI7VAGcBE-9Wf29di6_WhqPgV0-uEJZAGtTZ7ih4sq5SJTqnGUUQHyOvdz77RIKaeSyRAY4aCG_A1s5ziYcq677qEiVMwzfn2kDxKyi8EWk2g"
+}
+
+###
+# @name findAll2
+GET http://localhost:9366/api/userController/findAll2
+
+###
+# @name findBypaging1
+GET http://localhost:9366/api/ProjbaseController/findBypaging1?
+    pageNum=19&
+    pageSize=15
+
+###
+# @name findBypaging2
+GET http://localhost:9366/api/ProjbaseController/findBypaging2?
+    pageNum=1&
+    pageSize=5
+
+###
+# @name insertOne2
+POST http://localhost:9366/api/userController/insertOne2
+Content-Type: application/json
+
+YKPcUoTHWbsaTBQvWmDnMN9dD/IMQ2HgRFxSrashOHTilkGxEjRKauYghj/WPfRXnbkaeCzMFJSynuKNBXv06uKSvm5lB2YN/8omXEBHmkBZMsAiymDchlN3VHfYNvWYd
+
+###
+# @name /jwt/sign
+POST http://localhost:9366/api/AccessControl/jwt/sign
+Content-Type: application/json
+
+{
+  "username": "xxxxx",
+  "password": "xxxxxxx"
+}
+
+###
+# @name 访问网关认证
+GET http://192.168.119.128:9080/auth/
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJrZXkiOiJ1c2VykLWtleSIsInVzZXJOYW1lIjoiYmFpeXgiLCJwYXNzV29yZCI6IjE5OTMwMjE4IiwiZXhwIjoxNzA5Njk0ODcwfQ.L7eE0eCkFdOu2DhvnXhViON9hE2aqzGJgm4uHmCJadQ
+Accept-Encoding: gzip,deflate,br
+Connection: keep-alive
+
+###
+# @name 操作reids_service
+GET http://localhost:9366/api/RedisController/redis
+
+###
+# @name Nacos配置中心Test_getConfigInfo
+GET http://localhost:9366/api/nacos/getConfigInfo
+
+###
+# @name ChatGTP
+GET http://localhost:9366/api/AI/sse?
+    prompt=如何自学Java?
+
+###
+# @name insertOne3
+POST http://localhost:9366/api/userController/insertOne3
+Content-Type: application/json
+
+{
+  "username": "张毛",
+  "address": "北京",
+  "sex": "男",
+  "birthday": "19xx-x2-2x",
+  "ID_CARD": "xxxxxxxxxxxxxxxxxx",
+  "PHONE": "13904711125",
+  "EMAIL": "xxxxxxxxxx@xx.com"
+}
+
+###
+# @name getAuthCode
+POST http://localhost:9366/api/RedisController/getAuthCode
+Content-Type: application/json
+
+{
+  "phoneNumbers": [
+    "xxxxxxxxxxx"
+  ],
+  "templateId": "xxxxxxx",
+  "smsSign": "xxxxxxxxxxxx"
+}
+
+###
+# @name recursion
+GET http://localhost:9366/api/userController/recursion?
+    path=E:\&
+    searchContent=gc-2024-02-26_09-42-55.log
+
+###
+# @name CreatePDF
+GET http://localhost:9366/api/CreatePDF/2
+
+###
+# @name queryAllFileById
+POST http://localhost:9366/api/queryAllFileById
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="deleted"
+
+1
+--WebAppBoundary
+Content-Disposition: form-data; name="page"
+
+1
+--WebAppBoundary
+Content-Disposition: form-data; name="limit"
+
+20
+--WebAppBoundary
+Content-Disposition: form-data; name="uid"
+
+1
+--WebAppBoundary

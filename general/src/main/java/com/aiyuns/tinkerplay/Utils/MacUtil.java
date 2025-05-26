@@ -110,7 +110,11 @@ public class MacUtil {
         if (!ia.toString().startsWith("/") && ia.toString().length() > 16) {
             return "";
         }
-        byte[] mac = NetworkInterface.getByInetAddress(ia).getHardwareAddress();
+        NetworkInterface in = NetworkInterface.getByInetAddress(ia);
+        if (in == null) {
+            return "无法获取网卡信息，NetworkInterface 为空";
+        }
+        byte[] mac = in.getHardwareAddress();
         // 下面代码是把mac地址拼装成String
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < mac.length; i++) {
