@@ -1,98 +1,93 @@
 package com.aiyuns.tinkerplay.Other.Thread;
 
 /**
- * @Author: aiYunS
- * @Date: 2022-12-21 11:17
- * @Description: 等待唤醒机制解决生产者消费者问题
+ * @Author: aiYunS @Date: 2022-12-21 11:17 @Description: 等待唤醒机制解决生产者消费者问题
  */
-
 public class ProductorAndConsumer {
 
-    public static void main(String[] args) {
-        Clerk clerk = new Clerk();
+  public static void main(String[] args) {
+    Clerk clerk = new Clerk();
 
-        Productor pro = new Productor(clerk);
-        Consumer cus = new Consumer(clerk);
+    Productor pro = new Productor(clerk);
+    Consumer cus = new Consumer(clerk);
 
-        new Thread(pro, "生产者 A").start();
-        new Thread(cus, "消费者 B").start();
+    new Thread(pro, "生产者 A").start();
+    new Thread(cus, "消费者 B").start();
 
-        new Thread(pro, "生产者 C").start();
-        new Thread(cus, "消费者 D").start();
-    }
-
+    new Thread(pro, "生产者 C").start();
+    new Thread(cus, "消费者 D").start();
+  }
 }
 
-//店员
+// 店员
 class Clerk {
-    private int product = 0;
+  private int product = 0;
 
-    //进货
-    public synchronized void get() {//循环次数：0
-        //为了避免虚假唤醒问题，应该总是使用在循环中
-        while (product >= 1) {
-            System.out.println("产品已满！");
+  // 进货
+  public synchronized void get() { // 循环次数：0
+    // 为了避免虚假唤醒问题，应该总是使用在循环中
+    while (product >= 1) {
+      System.out.println("产品已满！");
 
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-            }
-
-        }
-
-        System.out.println(Thread.currentThread().getName() + " : " + ++product);
-        this.notifyAll();
+      try {
+        this.wait();
+      } catch (InterruptedException e) {
+      }
     }
 
-    //卖货
-    public synchronized void sale() {//product = 0; 循环次数：0
-        while (product <= 0) {
-            System.out.println("缺货！");
+    System.out.println(Thread.currentThread().getName() + " : " + ++product);
+    this.notifyAll();
+  }
 
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-            }
-        }
+  // 卖货
+  public synchronized void sale() { // product = 0; 循环次数：0
+    while (product <= 0) {
+      System.out.println("缺货！");
 
-        System.out.println(Thread.currentThread().getName() + " : " + --product);
-        this.notifyAll();
+      try {
+        this.wait();
+      } catch (InterruptedException e) {
+      }
     }
+
+    System.out.println(Thread.currentThread().getName() + " : " + --product);
+    this.notifyAll();
+  }
 }
 
-//生产者
+// 生产者
 class Productor implements Runnable {
-    private Clerk clerk;
+  private Clerk clerk;
 
-    public Productor(Clerk clerk) {
-        this.clerk = clerk;
+  public Productor(Clerk clerk) {
+    this.clerk = clerk;
+  }
+
+  @Override
+  public void run() {
+    for (int i = 0; i < 20; i++) {
+      try {
+        Thread.sleep(200);
+      } catch (InterruptedException e) {
+      }
+
+      clerk.get();
     }
-
-    @Override
-    public void run() {
-        for (int i = 0; i < 20; i++) {
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-            }
-
-            clerk.get();
-        }
-    }
+  }
 }
 
-//消费者
+// 消费者
 class Consumer implements Runnable {
-    private Clerk clerk;
+  private Clerk clerk;
 
-    public Consumer(Clerk clerk) {
-        this.clerk = clerk;
-    }
+  public Consumer(Clerk clerk) {
+    this.clerk = clerk;
+  }
 
-    @Override
-    public void run() {
-        for (int i = 0; i < 20; i++) {
-            clerk.sale();
-        }
+  @Override
+  public void run() {
+    for (int i = 0; i < 20; i++) {
+      clerk.sale();
     }
+  }
 }

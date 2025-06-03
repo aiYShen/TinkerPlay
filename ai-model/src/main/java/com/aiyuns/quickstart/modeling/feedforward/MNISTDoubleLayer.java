@@ -28,58 +28,59 @@ import org.slf4j.LoggerFactory;
  */
 public class MNISTDoubleLayer {
 
-    private static Logger log = LoggerFactory.getLogger(MNISTDoubleLayer.class);
+  private static Logger log = LoggerFactory.getLogger(MNISTDoubleLayer.class);
 
-    public static void main(String[] args) throws Exception {
-        //输入图像的行数和列数
-        final int numRows = 28;
-        final int numColumns = 28;
-        int outputNum = 10; // 输出类别的数量
-        int batchSize = 64; // 每个epoch的批次大小
-        int rngSeed = 123; // 用于可重复性的随机数种子
-        int numEpochs = 15; // 要执行的训练轮数（epoch）
-        double rate = 0.0015; // 学习率
+  public static void main(String[] args) throws Exception {
+    // 输入图像的行数和列数
+    final int numRows = 28;
+    final int numColumns = 28;
+    int outputNum = 10; // 输出类别的数量
+    int batchSize = 64; // 每个epoch的批次大小
+    int rngSeed = 123; // 用于可重复性的随机数种子
+    int numEpochs = 15; // 要执行的训练轮数（epoch）
+    double rate = 0.0015; // 学习率
 
-        //获取 DataSetIterators:
-        DataSetIterator mnistTrain = new MnistDataSetIterator(batchSize, true, rngSeed);
-        DataSetIterator mnistTest = new MnistDataSetIterator(batchSize, false, rngSeed);
+    // 获取 DataSetIterators:
+    DataSetIterator mnistTrain = new MnistDataSetIterator(batchSize, true, rngSeed);
+    DataSetIterator mnistTest = new MnistDataSetIterator(batchSize, false, rngSeed);
 
+    log.info("Build model....");
+    MultiLayerConfiguration conf =
+        new NeuralNetConfiguration.Builder()
+            .seed(rngSeed) // 包括一个随机种子以确保可重复性
+            .activation(Activation.RELU)
+            .weightInit(WeightInit.XAVIER)
+            .updater(new Nadam())
+            .l2(rate * 0.005) // 正则化学习模型
+            .list()
+            .layer(
+                new DenseLayer.Builder() // 创建第一个输入层
+                    .nIn(numRows * numColumns)
+                    .nOut(500)
+                    .build())
+            .layer(
+                new DenseLayer.Builder() // 创建第二个输入层
+                    .nIn(500)
+                    .nOut(100)
+                    .build())
+            .layer(
+                new OutputLayer.Builder(LossFunction.NEGATIVELOGLIKELIHOOD) // 创建隐藏层
+                    .activation(Activation.SOFTMAX)
+                    .nOut(outputNum)
+                    .build())
+            .build();
 
-        log.info("Build model....");
-        MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
-                .seed(rngSeed) //包括一个随机种子以确保可重复性
-                .activation(Activation.RELU)
-                .weightInit(WeightInit.XAVIER)
-                .updater(new Nadam())
-                .l2(rate * 0.005) //正则化学习模型
-                .list()
-                .layer(new DenseLayer.Builder() //创建第一个输入层
-                        .nIn(numRows * numColumns)
-                        .nOut(500)
-                        .build())
-                .layer(new DenseLayer.Builder() //创建第二个输入层
-                        .nIn(500)
-                        .nOut(100)
-                        .build())
-                .layer(new OutputLayer.Builder(LossFunction.NEGATIVELOGLIKELIHOOD) //创建隐藏层
-                        .activation(Activation.SOFTMAX)
-                        .nOut(outputNum)
-                        .build())
-                .build();
+    MultiLayerNetwork model = new MultiLayerNetwork(conf);
+    model.init();
+    model.setListeners(new ScoreIterationListener(5)); // 在每次迭代时打印得分
 
-        MultiLayerNetwork model = new MultiLayerNetwork(conf);
-        model.init();
-        model.setListeners(new ScoreIterationListener(5));  //在每次迭代时打印得分
+    log.info("Train model....");
+    model.fit(mnistTrain, numEpochs);
 
-        log.info("Train model....");
-        model.fit(mnistTrain, numEpochs);
+    log.info("Evaluate model....");
+    Evaluation eval = model.evaluate(mnistTest);
 
-        log.info("Evaluate model....");
-        Evaluation eval = model.evaluate(mnistTest);
-
-        log.info(eval.stats());
-        log.info("****************Example finished********************");
-
-    }
-
+    log.info(eval.stats());
+    log.info("****************Example finished********************");
+  }
 }

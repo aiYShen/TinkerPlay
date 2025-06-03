@@ -2,6 +2,8 @@ package com.aiyuns.quickstart.modeling.feedforward;
 
 import com.aiyuns.utils.DownloaderUtility;
 import com.aiyuns.utils.PlotUtil;
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
 import org.datavec.api.split.FileSplit;
@@ -21,13 +23,10 @@ import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.learning.config.Nesterovs;
 import org.nd4j.linalg.lossfunctions.LossFunctions.LossFunction;
 
-import java.io.File;
-import java.util.concurrent.TimeUnit;
-
 /**
  * “线性”数据分类示例
- * <p>
- * Based on the data from Jason Baldridge:
+ *
+ * <p>Based on the data from Jason Baldridge:
  * https://github.com/jasonbaldridge/try-tf/tree/master/simdata
  *
  * @author Josh Patterson
@@ -36,85 +35,93 @@ import java.util.concurrent.TimeUnit;
 @SuppressWarnings("DuplicatedCode")
 public class LinearDataClassifier {
 
-    public static boolean visualize = true;
-    public static String dataLocalPath;
+  public static boolean visualize = true;
+  public static String dataLocalPath;
 
-    public static void main(String[] args) throws Exception {
-        int seed = 123;
-        double learningRate = 0.01;
-        int batchSize = 50;
-        int nEpochs = 30;
+  public static void main(String[] args) throws Exception {
+    int seed = 123;
+    double learningRate = 0.01;
+    int batchSize = 50;
+    int nEpochs = 30;
 
-        int numInputs = 2;
-        int numOutputs = 2;
-        int numHiddenNodes = 20;
+    int numInputs = 2;
+    int numOutputs = 2;
+    int numHiddenNodes = 20;
 
-        dataLocalPath = DownloaderUtility.CLASSIFICATIONDATA.Download();
-        //加载训练数据
-        RecordReader rr = new CSVRecordReader();
-        rr.initialize(new FileSplit(new File(dataLocalPath, "linear_data_train.csv")));
-        DataSetIterator trainIter = new RecordReaderDataSetIterator(rr, batchSize, 0, 2);
+    dataLocalPath = DownloaderUtility.CLASSIFICATIONDATA.Download();
+    // 加载训练数据
+    RecordReader rr = new CSVRecordReader();
+    rr.initialize(new FileSplit(new File(dataLocalPath, "linear_data_train.csv")));
+    DataSetIterator trainIter = new RecordReaderDataSetIterator(rr, batchSize, 0, 2);
 
-        //加载测试/评估数据:
-        RecordReader rrTest = new CSVRecordReader();
-        rrTest.initialize(new FileSplit(new File(dataLocalPath, "linear_data_eval.csv")));
-        DataSetIterator testIter = new RecordReaderDataSetIterator(rrTest, batchSize, 0, 2);
+    // 加载测试/评估数据:
+    RecordReader rrTest = new CSVRecordReader();
+    rrTest.initialize(new FileSplit(new File(dataLocalPath, "linear_data_eval.csv")));
+    DataSetIterator testIter = new RecordReaderDataSetIterator(rrTest, batchSize, 0, 2);
 
-        MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
-                .seed(seed)
-                .weightInit(WeightInit.XAVIER)
-                .updater(new Nesterovs(learningRate, 0.9))
-                .list()
-                .layer(new DenseLayer.Builder().nIn(numInputs).nOut(numHiddenNodes)
-                        .activation(Activation.RELU)
-                        .build())
-                .layer(new OutputLayer.Builder(LossFunction.NEGATIVELOGLIKELIHOOD)
-                        .activation(Activation.SOFTMAX)
-                        .nIn(numHiddenNodes).nOut(numOutputs).build())
-                .build();
+    MultiLayerConfiguration conf =
+        new NeuralNetConfiguration.Builder()
+            .seed(seed)
+            .weightInit(WeightInit.XAVIER)
+            .updater(new Nesterovs(learningRate, 0.9))
+            .list()
+            .layer(
+                new DenseLayer.Builder()
+                    .nIn(numInputs)
+                    .nOut(numHiddenNodes)
+                    .activation(Activation.RELU)
+                    .build())
+            .layer(
+                new OutputLayer.Builder(LossFunction.NEGATIVELOGLIKELIHOOD)
+                    .activation(Activation.SOFTMAX)
+                    .nIn(numHiddenNodes)
+                    .nOut(numOutputs)
+                    .build())
+            .build();
 
+    MultiLayerNetwork model = new MultiLayerNetwork(conf);
+    model.init();
+    model.setListeners(new ScoreIterationListener(10)); // Print score every 10 parameter updates
 
-        MultiLayerNetwork model = new MultiLayerNetwork(conf);
-        model.init();
-        model.setListeners(new ScoreIterationListener(10));  //Print score every 10 parameter updates
+    model.fit(trainIter, nEpochs);
 
-        model.fit(trainIter, nEpochs);
-
-        System.out.println("Evaluate model....");
-        Evaluation eval = new Evaluation(numOutputs);
-        while (testIter.hasNext()) {
-            DataSet t = testIter.next();
-            INDArray features = t.getFeatures();
-            INDArray labels = t.getLabels();
-            INDArray predicted = model.output(features, false);
-            eval.eval(labels, predicted);
-        }
-        //上述循环的另一种方式
-        //Evaluation evalResults = model.evaluate(testIter);
-
-        //打印评估统计信息
-        System.out.println(eval.stats());
-
-        System.out.println("\n****************Example finished********************");
-        //T训练完成。接下来的代码仅用于绘制数据和预测结果
-        generateVisuals(model, trainIter, testIter);
+    System.out.println("Evaluate model....");
+    Evaluation eval = new Evaluation(numOutputs);
+    while (testIter.hasNext()) {
+      DataSet t = testIter.next();
+      INDArray features = t.getFeatures();
+      INDArray labels = t.getLabels();
+      INDArray predicted = model.output(features, false);
+      eval.eval(labels, predicted);
     }
+    // 上述循环的另一种方式
+    // Evaluation evalResults = model.evaluate(testIter);
 
-    public static void generateVisuals(MultiLayerNetwork model, DataSetIterator trainIter, DataSetIterator testIter) throws Exception {
-        if (visualize) {
-            double xMin = 0;
-            double xMax = 1.0;
-            double yMin = -0.2;
-            double yMax = 0.8;
-            int nPointsPerAxis = 100;
+    // 打印评估统计信息
+    System.out.println(eval.stats());
 
-            //生成覆盖所有特征范围的 x, y 点
-            INDArray allXYPoints = PlotUtil.generatePointsOnGraph(xMin, xMax, yMin, yMax, nPointsPerAxis);
-            //Get train data and plot with predictions
-            PlotUtil.plotTrainingData(model, trainIter, allXYPoints, nPointsPerAxis);
-            TimeUnit.SECONDS.sleep(3);
-            //获取测试数据，将测试数据输入网络生成预测，并绘制这些预测结果:
-            PlotUtil.plotTestData(model, testIter, allXYPoints, nPointsPerAxis);
-        }
+    System.out.println("\n****************Example finished********************");
+    // T训练完成。接下来的代码仅用于绘制数据和预测结果
+    generateVisuals(model, trainIter, testIter);
+  }
+
+  public static void generateVisuals(
+      MultiLayerNetwork model, DataSetIterator trainIter, DataSetIterator testIter)
+      throws Exception {
+    if (visualize) {
+      double xMin = 0;
+      double xMax = 1.0;
+      double yMin = -0.2;
+      double yMax = 0.8;
+      int nPointsPerAxis = 100;
+
+      // 生成覆盖所有特征范围的 x, y 点
+      INDArray allXYPoints = PlotUtil.generatePointsOnGraph(xMin, xMax, yMin, yMax, nPointsPerAxis);
+      // Get train data and plot with predictions
+      PlotUtil.plotTrainingData(model, trainIter, allXYPoints, nPointsPerAxis);
+      TimeUnit.SECONDS.sleep(3);
+      // 获取测试数据，将测试数据输入网络生成预测，并绘制这些预测结果:
+      PlotUtil.plotTestData(model, testIter, allXYPoints, nPointsPerAxis);
     }
+  }
 }

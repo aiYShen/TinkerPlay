@@ -6,67 +6,57 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * @Author: aiYunS
- * @Date: 2022-8-11 下午 04:04
- * @Description:
+ * @Author: aiYunS @Date: 2022-8-11 下午 04:04 @Description:
  */
 public class PoolConnection {
 
-    /**
-     * 数据库连接
-     */
-    private Connection conn = null;
+  /** 数据库连接 */
+  private Connection conn = null;
 
-    /**
-     * 标记该连接是否使用
-     */
-    private boolean isUse = false;
+  /** 标记该连接是否使用 */
+  private boolean isUse = false;
 
-    /*
-     * 构造方法
-     * */
-    public PoolConnection(Connection conn, boolean isUse) {
-        this.conn = conn;
-        this.isUse = isUse;
+  /*
+   * 构造方法
+   * */
+  public PoolConnection(Connection conn, boolean isUse) {
+    this.conn = conn;
+    this.isUse = isUse;
+  }
+
+  /** 查询实现 */
+  public ResultSet queryBySql(String sql) {
+    Statement sm = null;
+    ResultSet rs = null;
+    try {
+      sm = conn.createStatement();
+      rs = sm.executeQuery(sql);
+
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
 
-    /**
-     * 查询实现
-     */
-    public ResultSet queryBySql(String sql) {
-        Statement sm = null;
-        ResultSet rs = null;
-        try {
-            sm = conn.createStatement();
-            rs = sm.executeQuery(sql);
+    return rs;
+  }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+  public Connection getConn() {
+    return conn;
+  }
 
-        return rs;
-    }
+  public void setConn(Connection conn) {
+    this.conn = conn;
+  }
 
-    public Connection getConn() {
-        return conn;
-    }
+  public boolean isUse() {
+    return isUse;
+  }
 
-    public void setConn(Connection conn) {
-        this.conn = conn;
-    }
+  public void setUse(boolean use) {
+    isUse = use;
+  }
 
-    public boolean isUse() {
-        return isUse;
-    }
-
-    public void setUse(boolean use) {
-        isUse = use;
-    }
-
-    /**
-     * 将该连接置为可用状态
-     */
-    public void close() {
-        this.isUse = false;
-    }
+  /** 将该连接置为可用状态 */
+  public void close() {
+    this.isUse = false;
+  }
 }

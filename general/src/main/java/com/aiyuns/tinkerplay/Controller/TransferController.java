@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "TransferController", description = "模拟金融模块")
 public class TransferController {
 
-    @Resource
-    private TransferService transferService;
+  @Resource private TransferService transferService;
 
-    @PostMapping
-    @Operation(summary = "模拟转账")
-    @WebLog(description = "模拟转账")
-    public ResponseEntity<String> transfer(@RequestBody TransferRequest transferRequest) {
-        transferService.transfer(transferRequest.getFromAccountNumber(),
-                transferRequest.getToAccountNumber(),
-                transferRequest.getAmount());
-        return ResponseEntity.ok("Transfer successful");
-    }
+  @PostMapping
+  @Operation(summary = "模拟转账")
+  @WebLog(description = "模拟转账")
+  public ResponseEntity<String> transfer(@RequestBody TransferRequest transferRequest) {
+    transferService.transfer(
+        transferRequest.getFromAccountNumber(),
+        transferRequest.getToAccountNumber(),
+        transferRequest.getAmount());
+    return ResponseEntity.ok("Transfer successful");
+  }
 }

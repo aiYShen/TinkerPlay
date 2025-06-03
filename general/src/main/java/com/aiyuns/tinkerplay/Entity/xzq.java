@@ -3,127 +3,153 @@ package com.aiyuns.tinkerplay.Entity;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * @Author: aiYunS
- * @Date: 2021/6/30 下午 02:25
- * @Description: 行政区实体类
+ * @Author: aiYunS @Date: 2021/6/30 下午 02:25 @Description: 行政区实体类
  */
 @Schema(name = "行政区信息实体类")
 public class xzq {
 
-    @Schema(description = "标识码")
-    int bsm;
-    @Schema(description = "sss")
-    String sss;
-    @Schema(description = "ssx")
-    String ssx;
-    @Schema(description = "行政区编码")
-    String bzxzqbm;
-    @Schema(description = "不动产行政区编码")
-    String bdcxzqbm;
-    @Schema(description = "创建人")
-    String createby;
-    @Schema(description = "创建时间")
-    String createtime;
-    @Schema(description = "编辑人")
-    String editby;
-    @Schema(description = "编辑时间")
-    String edittime;
-    @Schema(description = "查询地区编码")
-    String deptcode;
+  @Schema(description = "标识码")
+  int bsm;
 
-    public int getBsm() {
-        return bsm;
-    }
+  @Schema(description = "sss")
+  String sss;
 
-    public void setBsm(int bsm) {
-        this.bsm = bsm;
-    }
+  @Schema(description = "ssx")
+  String ssx;
 
-    public String getSss() {
-        return sss;
-    }
+  @Schema(description = "行政区编码")
+  String bzxzqbm;
 
-    public void setSss(String sss) {
-        this.sss = sss;
-    }
+  @Schema(description = "不动产行政区编码")
+  String bdcxzqbm;
 
-    public String getSsx() {
-        return ssx;
-    }
+  @Schema(description = "创建人")
+  String createby;
 
-    public void setSsx(String ssx) {
-        this.ssx = ssx;
-    }
+  @Schema(description = "创建时间")
+  String createtime;
 
-    public String getBzxzqbm() {
-        return bzxzqbm;
-    }
+  @Schema(description = "编辑人")
+  String editby;
 
-    public void setBzxzqbm(String bzxzqbm) {
-        this.bzxzqbm = bzxzqbm;
-    }
+  @Schema(description = "编辑时间")
+  String edittime;
 
-    public String getBdcxzqbm() {
-        return bdcxzqbm;
-    }
+  @Schema(description = "查询地区编码")
+  String deptcode;
 
-    public void setBdcxzqbm(String bdcxzqbm) {
-        this.bdcxzqbm = bdcxzqbm;
-    }
+  public int getBsm() {
+    return bsm;
+  }
 
-    public String getCreateby() {
-        return createby;
-    }
+  public void setBsm(int bsm) {
+    this.bsm = bsm;
+  }
 
-    public void setCreateby(String createby) {
-        this.createby = createby;
-    }
+  public String getSss() {
+    return sss;
+  }
 
-    public String getCreatetime() {
-        return createtime;
-    }
+  public void setSss(String sss) {
+    this.sss = sss;
+  }
 
-    public void setCreatetime(String createtime) {
-        this.createtime = createtime;
-    }
+  public String getSsx() {
+    return ssx;
+  }
 
-    public String getEditby() {
-        return editby;
-    }
+  public void setSsx(String ssx) {
+    this.ssx = ssx;
+  }
 
-    public void setEditby(String editby) {
-        this.editby = editby;
-    }
+  public String getBzxzqbm() {
+    return bzxzqbm;
+  }
 
-    public String getEdittime() {
-        return edittime;
-    }
+  public void setBzxzqbm(String bzxzqbm) {
+    this.bzxzqbm = bzxzqbm;
+  }
 
-    public void setEdittime(String edittime) {
-        this.edittime = edittime;
-    }
+  public String getBdcxzqbm() {
+    return bdcxzqbm;
+  }
 
-    public String getDeptcode() {
-        return deptcode;
-    }
+  public void setBdcxzqbm(String bdcxzqbm) {
+    this.bdcxzqbm = bdcxzqbm;
+  }
 
-    public void setDeptcode(String deptcode) {
-        this.deptcode = deptcode;
-    }
+  public String getCreateby() {
+    return createby;
+  }
 
-    @Override
-    public String toString() {
-        return "xzq{" +
-                "bsm=" + bsm +
-                ", sss='" + sss + '\'' +
-                ", ssx='" + ssx + '\'' +
-                ", bzxzqbm='" + bzxzqbm + '\'' +
-                ", bdcxzqbm='" + bdcxzqbm + '\'' +
-                ", createby='" + createby + '\'' +
-                ", createtime='" + createtime + '\'' +
-                ", editby='" + editby + '\'' +
-                ", edittime='" + edittime + '\'' +
-                ", deptcode='" + deptcode + '\'' +
-                '}';
-    }
+  public void setCreateby(String createby) {
+    this.createby = createby;
+  }
+
+  public String getCreatetime() {
+    return createtime;
+  }
+
+  public void setCreatetime(String createtime) {
+    this.createtime = createtime;
+  }
+
+  public String getEditby() {
+    return editby;
+  }
+
+  public void setEditby(String editby) {
+    this.editby = editby;
+  }
+
+  public String getEdittime() {
+    return edittime;
+  }
+
+  public void setEdittime(String edittime) {
+    this.edittime = edittime;
+  }
+
+  public String getDeptcode() {
+    return deptcode;
+  }
+
+  public void setDeptcode(String deptcode) {
+    this.deptcode = deptcode;
+  }
+
+  @Override
+  public String toString() {
+    return "xzq{"
+        + "bsm="
+        + bsm
+        + ", sss='"
+        + sss
+        + '\''
+        + ", ssx='"
+        + ssx
+        + '\''
+        + ", bzxzqbm='"
+        + bzxzqbm
+        + '\''
+        + ", bdcxzqbm='"
+        + bdcxzqbm
+        + '\''
+        + ", createby='"
+        + createby
+        + '\''
+        + ", createtime='"
+        + createtime
+        + '\''
+        + ", editby='"
+        + editby
+        + '\''
+        + ", edittime='"
+        + edittime
+        + '\''
+        + ", deptcode='"
+        + deptcode
+        + '\''
+        + '}';
+  }
 }
