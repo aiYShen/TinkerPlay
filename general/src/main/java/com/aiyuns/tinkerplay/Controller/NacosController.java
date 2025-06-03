@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @Author: aiYunS
- * @Date: 2023年3月25日, 0025 下午 5:18:56
- * @Description: Nacos配置中心Test
+ * @Author: aiYunS @Date: 2023年3月25日, 0025 下午 5:18:56 @Description: Nacos配置中心Test
  */
 @RestController
 @RefreshScope // 动态刷新
@@ -19,13 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/nacos")
 public class NacosController {
 
-    @Value("${config.info}")
-    private String configInfo;
+  @Value("${config.info}")
+  private String configInfo;
 
-    @Operation(summary = "Nacos配置中心Test")
-    @GetMapping("/getConfigInfo")
-    public String getConfigInfo() {
-        return configInfo;
-    }
-
+  @Operation(summary = "Nacos配置中心Test")
+  @GetMapping("/getConfigInfo")
+  public String getConfigInfo() {
+    return configInfo;
+  }
 }

@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @Author: aiYunS
- * @Date: 2022-10-12 下午 05:15
- * @Description: 实体类
+ * @Author: aiYunS @Date: 2022-10-12 下午 05:15 @Description: 实体类
  */
 @Schema(name = "Token信息封装实体类")
 @Data
@@ -16,45 +14,47 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TokenAccess {
 
-    @Schema(description = "员工姓名")
-    private String staff_name;
-    @Schema(description = "用户ID")
-    private String user_id;
-    @Schema(description = "用户姓名")
-    private String username;
-    @Schema(description = "状态")
-    private Integer status;
+  @Schema(description = "员工姓名")
+  private String staff_name;
 
-    public String getStaff_name() {
-        return staff_name;
-    }
+  @Schema(description = "用户ID")
+  private String user_id;
 
-    public void setStaff_name(String staff_name) {
-        this.staff_name = staff_name;
-    }
+  @Schema(description = "用户姓名")
+  private String username;
 
-    public String getUser_id() {
-        return user_id;
-    }
+  @Schema(description = "状态")
+  private Integer status;
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
+  public String getStaff_name() {
+    return staff_name;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public void setStaff_name(String staff_name) {
+    this.staff_name = staff_name;
+  }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  public String getUser_id() {
+    return user_id;
+  }
 
-    public Integer getStatus() {
-        return status;
-    }
+  public void setUser_id(String user_id) {
+    this.user_id = user_id;
+  }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+  public String getUsername() {
+    return username;
+  }
 
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public Integer getStatus() {
+    return status;
+  }
+
+  public void setStatus(Integer status) {
+    this.status = status;
+  }
 }

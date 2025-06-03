@@ -1,5 +1,7 @@
 package com.aiyuns.quickstart.modeling.feedforward;
 
+import com.aiyuns.utils.DownloaderUtility;
+import java.io.File;
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
 import org.datavec.api.split.FileSplit;
@@ -23,9 +25,6 @@ import org.nd4j.linalg.learning.config.Sgd;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.aiyuns.utils.DownloaderUtility;
-
-import java.io.File;
 
 /*
     《简单的多层感知器（MLP）神经网络》
@@ -58,74 +57,74 @@ import java.io.File;
 @SuppressWarnings("DuplicatedCode")
 public class IrisClassifier {
 
-    private static Logger log = LoggerFactory.getLogger(IrisClassifier.class);
+  private static Logger log = LoggerFactory.getLogger(IrisClassifier.class);
 
-    public static void main(String[] args) throws  Exception {
+  public static void main(String[] args) throws Exception {
 
-        //首先：使用记录阅读器获取数据集。CSVRecordReader处理加载/解析
-        int numLinesToSkip = 0;
-        char delimiter = ',';
-        RecordReader recordReader = new CSVRecordReader(numLinesToSkip,delimiter);
-        recordReader.initialize(new FileSplit(new File(DownloaderUtility.IRISDATA.Download(),"iris.txt")));
+    // 首先：使用记录阅读器获取数据集。CSVRecordReader处理加载/解析
+    int numLinesToSkip = 0;
+    char delimiter = ',';
+    RecordReader recordReader = new CSVRecordReader(numLinesToSkip, delimiter);
+    recordReader.initialize(
+        new FileSplit(new File(DownloaderUtility.IRISDATA.Download(), "iris.txt")));
 
-        //第二: RecordReaderDataSetIterator 负责将数据转换为 DataSet 对象，准备好用于神经网络
-        int labelIndex = 4;     //iris.txt CSV 中每行有 5 个值：4 个输入特征，后跟一个整数标签（类别）索引。标签是每行的第 5 个值（索引为 4）
-        int numClasses = 3;     //iris 数据集包含 3 个类别（types of iris flowers）。类别的整数值为 0、1 或 2
-        int batchSize = 150;    //Iris 数据集：总共有 150 个样本。我们将它们全部加载到一个 DataSet 中（不推荐用于大型数据集）
+    // 第二: RecordReaderDataSetIterator 负责将数据转换为 DataSet 对象，准备好用于神经网络
+    int labelIndex = 4; // iris.txt CSV 中每行有 5 个值：4 个输入特征，后跟一个整数标签（类别）索引。标签是每行的第 5 个值（索引为 4）
+    int numClasses = 3; // iris 数据集包含 3 个类别（types of iris flowers）。类别的整数值为 0、1 或 2
+    int batchSize = 150; // Iris 数据集：总共有 150 个样本。我们将它们全部加载到一个 DataSet 中（不推荐用于大型数据集）
 
-        DataSetIterator iterator = new RecordReaderDataSetIterator(recordReader,batchSize,labelIndex,numClasses);
-        DataSet allData = iterator.next();
-        allData.shuffle();
-        SplitTestAndTrain testAndTrain = allData.splitTestAndTrain(0.65);  //使用 65% 的数据进行训练
+    DataSetIterator iterator =
+        new RecordReaderDataSetIterator(recordReader, batchSize, labelIndex, numClasses);
+    DataSet allData = iterator.next();
+    allData.shuffle();
+    SplitTestAndTrain testAndTrain = allData.splitTestAndTrain(0.65); // 使用 65% 的数据进行训练
 
-        DataSet trainingData = testAndTrain.getTrain();
-        DataSet testData = testAndTrain.getTest();
+    DataSet trainingData = testAndTrain.getTrain();
+    DataSet testData = testAndTrain.getTest();
 
-        //我们需要对数据进行标准化。我们将使用 NormalizeStandardize（它将数据转化为均值为 0，方差为 1）
-        DataNormalization normalizer = new NormalizerStandardize();
-        normalizer.fit(trainingData);           //从训练数据中收集统计信息（均值/标准差）。这不会修改输入数据
-        normalizer.transform(trainingData);     //对训练数据应用标准化
-        normalizer.transform(testData);         //对测试数据应用标准化。这是使用从 训练 数据集计算得出的统计信息
+    // 我们需要对数据进行标准化。我们将使用 NormalizeStandardize（它将数据转化为均值为 0，方差为 1）
+    DataNormalization normalizer = new NormalizerStandardize();
+    normalizer.fit(trainingData); // 从训练数据中收集统计信息（均值/标准差）。这不会修改输入数据
+    normalizer.transform(trainingData); // 对训练数据应用标准化
+    normalizer.transform(testData); // 对测试数据应用标准化。这是使用从 训练 数据集计算得出的统计信息
 
+    final int numInputs = 4;
+    int outputNum = 3;
+    long seed = 6;
 
-        final int numInputs = 4;
-        int outputNum = 3;
-        long seed = 6;
+    log.info("Build model....");
+    MultiLayerConfiguration conf =
+        new NeuralNetConfiguration.Builder()
+            .seed(seed)
+            .activation(Activation.TANH)
+            .weightInit(WeightInit.XAVIER)
+            .updater(new Sgd(0.1))
+            .l2(1e-4)
+            .list()
+            .layer(new DenseLayer.Builder().nIn(numInputs).nOut(3).build())
+            .layer(new DenseLayer.Builder().nIn(3).nOut(3).build())
+            .layer(
+                new OutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD)
+                    .activation(Activation.SOFTMAX) // 为这一层将全局的 TANH 激活函数覆盖为 softmax
+                    .nIn(3)
+                    .nOut(outputNum)
+                    .build())
+            .build();
 
+    // 运行模型
+    MultiLayerNetwork model = new MultiLayerNetwork(conf);
+    model.init();
+    // 每 100 次迭代记录一次得分
+    model.setListeners(new ScoreIterationListener(100));
 
-        log.info("Build model....");
-        MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
-                .seed(seed)
-                .activation(Activation.TANH)
-                .weightInit(WeightInit.XAVIER)
-                .updater(new Sgd(0.1))
-                .l2(1e-4)
-                .list()
-                .layer(new DenseLayer.Builder().nIn(numInputs).nOut(3)
-                        .build())
-                .layer(new DenseLayer.Builder().nIn(3).nOut(3)
-                        .build())
-                .layer( new OutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD)
-                        .activation(Activation.SOFTMAX) //为这一层将全局的 TANH 激活函数覆盖为 softmax
-                        .nIn(3).nOut(outputNum).build())
-                .build();
-
-        //运行模型
-        MultiLayerNetwork model = new MultiLayerNetwork(conf);
-        model.init();
-        //每 100 次迭代记录一次得分
-        model.setListeners(new ScoreIterationListener(100));
-
-        for(int i=0; i<1000; i++ ) {
-            model.fit(trainingData);
-        }
-
-        //在测试集上评估模型
-        Evaluation eval = new Evaluation(3);
-        INDArray output = model.output(testData.getFeatures());
-        eval.eval(testData.getLabels(), output);
-        log.info(eval.stats());
-
+    for (int i = 0; i < 1000; i++) {
+      model.fit(trainingData);
     }
 
+    // 在测试集上评估模型
+    Evaluation eval = new Evaluation(3);
+    INDArray output = model.output(testData.getFeatures());
+    eval.eval(testData.getLabels(), output);
+    log.info(eval.stats());
+  }
 }
