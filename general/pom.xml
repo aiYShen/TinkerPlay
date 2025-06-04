@@ -57,7 +57,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- Spring Ai核心模块 -->
+        <!-- Spring Ai模块 -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-core</artifactId>
