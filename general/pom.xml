@@ -18,71 +18,10 @@
         <okhttp.version>5.0.0-alpha.14</okhttp.version>
         <elasticsearch.version>7.17.3</elasticsearch.version>
         <itextpdf.version>5.5.13.4</itextpdf.version>
-        <spring.ai.version>1.0.0-M6</spring.ai.version>
+        <spring.ai.version>1.0.0-SNAPSHOT</spring.ai.version>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>arcgis</id>
-            <url>https://esri.jfrog.io/artifactory/arcgis</url>
-        </repository>
-    </repositories>
-
-    <dependencyManagement>
-        <!--
-        <scope> </scope>标签
-        provided: 此依赖将参与编译、测试、运行阶段，但是不会参与到打包中去
-        runtime: 在运行时可用，此依赖无需参与项目编译，但是会参与项目的测试和运行，并且最终会参与打包
-        test: 表示被依赖项目仅仅参与测试相关的工作，包括测试代码的编译，执行；比如Junit
-        system: 与provided类似，但是它不会去maven仓库寻找依赖，而是在本地找；而systemPath标签将提供本地路径
-        import: 只能在dependencyManagement中使用，相当于从其他pom文件中导入依赖设置
-         -->
-        <dependencies>
-            <!-- nacos -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2024.0.1</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2023.0.3.2</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
-        <!-- Spring Ai模块 -->
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-core</artifactId>
-            <version>${spring.ai.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-spring-boot-autoconfigure</artifactId>
-            <version>${spring.ai.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-openai</artifactId>
-            <version>${spring.ai.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-client-chat</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-model</artifactId>
-            <version>1.0.0</version>
-        </dependency>
         <!-- 解析SQL -->
         <dependency>
             <groupId>com.github.jsqlparser</groupId>
@@ -156,47 +95,6 @@
             <groupId>org.bytedeco</groupId>
             <artifactId>opencv</artifactId>
             <version>4.10.0-1.5.11</version>
-        </dependency>
-        <!-- 带有地理信息的影像图片处理 -->
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-main</artifactId>
-            <version>${geotools.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-geotiff</artifactId>
-            <version>${geotools.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-opengis</artifactId>
-            <version>29.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-api</artifactId>
-            <version>${geotools.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-coverage</artifactId>
-            <version>${geotools.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-referencing</artifactId>
-            <version>${geotools.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.locationtech.jts</groupId>
-            <artifactId>jts-core</artifactId>
-            <version>1.20.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.gdal</groupId>
-            <artifactId>gdal</artifactId>
-            <version>3.10.1</version>
         </dependency>
         <!-- 汉语言处理包 -->
         <dependency>
@@ -304,12 +202,10 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-            <version>2023.0.3.2</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-            <version>2023.0.3.2</version>
         </dependency>
         <!-- logstash -->
         <dependency>
@@ -420,7 +316,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!-- ChatGPT -->
+        <!-- ChatGPT三方包 -->
         <dependency>
             <groupId>com.github.plexpt</groupId>
             <artifactId>chatgpt</artifactId>
@@ -737,6 +633,73 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!-- 带有地理信息的影像图片处理 -->
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-main</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-geotiff</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-opengis</artifactId>
+            <version>29.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-api</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-coverage</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-referencing</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.locationtech.jts</groupId>
+            <artifactId>jts-core</artifactId>
+            <version>1.20.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.gdal</groupId>
+            <artifactId>gdal</artifactId>
+            <version>3.10.1</version>
+        </dependency>
+        <!-- Spring Ai模块 -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-core</artifactId>
+            <version>${spring.ai.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-spring-boot-autoconfigure</artifactId>
+            <version>${spring.ai.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-openai</artifactId>
+            <version>${spring.ai.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-client-chat</artifactId>
+            <version>${spring.ai.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-model</artifactId>
+            <version>${spring.ai.version}</version>
         </dependency>
     </dependencies>
     <!-- 发布包 -->
