@@ -437,3 +437,17 @@ docker run --name elasticsearch \
  退出虚拟环境: deactivate
 
  java虚拟机生成内存转储文件: jmap -F -dump:live,format=b,file=heap.hprof 进程ID
+
+ Linux搜索文件内部关键字指令:
+ -i：忽略大小写: grep -i "error" /var/log/syslog
+ -r：递归搜索目录中的所有文件: grep -r "关键字" /path/to/directory
+ -n：显示匹配行的行号: grep -n "error" /var/log/syslog
+ -w：精确匹配整个单词: grep -w "error" /var/log/syslog
+
+ -N：显示行号: less -N 文件名
+ -i：忽略搜索时的大小写: less -i 文件名
+ -M：显示更详细的状态信息（包括行号、百分比等）: less -M 文件名
+ /关键字：向前搜索关键字（按 Enter 确认）
+ ?关键字：向后搜索关键字
+ n：跳转到下一个匹配
+ N：跳转到上一个匹配
