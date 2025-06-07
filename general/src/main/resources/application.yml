@@ -203,6 +203,25 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  ai:
+    openai:
+      base-url: api.openai.com
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o-mini
+    retry:
+      # 重试尝试的最大次数
+      max-attempts: 3
+      backoff:
+        # 指数回退策略的初始睡眠时间
+        initial-interval: 5
+        # 回退间隔乘数
+        multiplier: 10
+        # 最大回退持续时间
+        max-interval: 10
+      # 如果为假，则抛出NonTransientAiException，并且不要尝试重试4xx客户端错误代码
+      on-client-errors: false
 
 elasticsearch:
   rest:
