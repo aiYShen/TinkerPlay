@@ -568,7 +568,7 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>3.0.4</version>
+            <version>3.0.5-SNAPSHOT</version>
         </dependency>
         <!-- 自动插入到编辑器和构建工具中，增强java -->
         <dependency>
@@ -576,18 +576,6 @@
             <artifactId>lombok</artifactId>
             <version>1.18.38</version>
             <scope>provided</scope>
-        </dependency>
-        <!-- Mybatis包 -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.19</version>
-        </dependency>
-        <!-- 自动装配:配置文件配置项值、环境变量值、操作系统等等自定义可变量，自动将对应的组件（对象）注入到我们的应用中 -->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-autoconfigure</artifactId>
-            <version>3.0.4</version>
         </dependency>
         <!-- JSON包 -->
         <dependency>
@@ -904,6 +892,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <release>21</release>
+                    <compilerArgs>--enable-preview</compilerArgs>
                     <!-- 跳过安全检查 -->
                     <!--                <skip>true</skip>-->
                     <!-- 排除单元测试的类不进行编译打包 -->
