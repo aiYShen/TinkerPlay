@@ -19,6 +19,7 @@
         <elasticsearch.version>7.17.3</elasticsearch.version>
         <itextpdf.version>5.5.13.4</itextpdf.version>
         <spring.ai.version>1.0.0-SNAPSHOT</spring.ai.version>
+        <openapi.version>2.8.9</openapi.version>
     </properties>
 
     <dependencies>
@@ -397,17 +398,17 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.8.8</version>
+            <version>${openapi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
-            <version>2.8.8</version>
+            <version>${openapi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-            <version>2.8.8</version>
+            <version>${openapi.version}</version>
         </dependency>
         <!-- 服务启动时自动升级内置的SQL脚本 -->
         <!-- 支持低数据库5.7版本 -->
@@ -567,7 +568,7 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>3.0.4</version>
+            <version>3.0.5-SNAPSHOT</version>
         </dependency>
         <!-- 自动插入到编辑器和构建工具中，增强java -->
         <dependency>
@@ -575,18 +576,6 @@
             <artifactId>lombok</artifactId>
             <version>1.18.38</version>
             <scope>provided</scope>
-        </dependency>
-        <!-- Mybatis包 -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.19</version>
-        </dependency>
-        <!-- 自动装配:配置文件配置项值、环境变量值、操作系统等等自定义可变量，自动将对应的组件（对象）注入到我们的应用中 -->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-autoconfigure</artifactId>
-            <version>3.0.4</version>
         </dependency>
         <!-- JSON包 -->
         <dependency>
@@ -903,6 +892,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <release>21</release>
+                    <compilerArgs>--enable-preview</compilerArgs>
                     <!-- 跳过安全检查 -->
                     <!--                <skip>true</skip>-->
                     <!-- 排除单元测试的类不进行编译打包 -->
