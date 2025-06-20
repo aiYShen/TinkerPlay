@@ -230,7 +230,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.8.38</version>
+            <version>5.8.39</version>
         </dependency>
         <!-- 文件上传 储存桶 -->
         <dependency>
@@ -377,7 +377,7 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>2.1.0</version>
+            <version>2.1.1</version>
         </dependency>
         <!-- swagger调试接口 API文档生产工具-->
         <!--        <dependency>-->
