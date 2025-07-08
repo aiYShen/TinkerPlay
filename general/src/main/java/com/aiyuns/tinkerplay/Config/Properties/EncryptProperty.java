@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "body.encrypt")
 @Data
-public class EncryptProperties {
+public class EncryptProperty {
   // 默认的key
   // private final static String DEFAULT_KEY = "iamwalkerencrypt";
 
