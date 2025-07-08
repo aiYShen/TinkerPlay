@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 @Builder
-public class BucketPolicyConfigDto {
+public class BucketPolicyConfigProperty {
 
   private String Version;
   private List<Statement> Statement;
