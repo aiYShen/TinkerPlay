@@ -11,16 +11,16 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = NacosInfoProperty.PREFIX)
 public class NacosInfoProperty {
 
-    public static final String PREFIX = "config";
+  public static final String PREFIX = "config";
 
-    private String info;
+  private String info;
 
-    InnerClass innerClass =  new InnerClass();
+  InnerClass innerClass = new InnerClass();
 
-    @Data
-    public static class InnerClass {
-        private String name;
-        private int age;
-        private boolean enable;
-    }
+  @Data
+  public static class InnerClass {
+    private String name;
+    private int age;
+    private boolean enable;
+  }
 }
