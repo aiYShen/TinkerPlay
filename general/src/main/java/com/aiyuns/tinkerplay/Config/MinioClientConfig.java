@@ -1,6 +1,6 @@
 package com.aiyuns.tinkerplay.Config;
 
-import com.aiyuns.tinkerplay.Config.Properties.StorageProperty;
+import com.aiyuns.tinkerplay.Config.Properties.MinioProperty;
 import io.minio.BucketExistsArgs;
 import io.minio.MinioClient;
 import io.minio.messages.Bucket;
@@ -19,7 +19,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Configuration
 public class MinioClientConfig {
-  @Autowired private StorageProperty storageProperty;
+
+  @Autowired private MinioProperty minioProperty;
 
   private static MinioClient minioClient;
 
@@ -59,8 +60,8 @@ public class MinioClientConfig {
     try {
       minioClient =
           MinioClient.builder()
-              .endpoint(storageProperty.getEndpoint())
-              .credentials(storageProperty.getAccessKey(), storageProperty.getSecretKey())
+              .endpoint(minioProperty.getEndpoint())
+              .credentials(minioProperty.getAccessKey(), minioProperty.getSecretKey())
               .build();
     } catch (Exception e) {
       e.printStackTrace();

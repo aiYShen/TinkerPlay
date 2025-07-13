@@ -1,6 +1,6 @@
 package com.aiyuns.tinkerplay.DecryptAndEncry;
 
-import com.aiyuns.tinkerplay.Config.Properties.EncryptProperties;
+import com.aiyuns.tinkerplay.Config.Properties.EncryptProperty;
 import com.aiyuns.tinkerplay.CustomAnnotations.Decrypt;
 import com.aiyuns.tinkerplay.Utils.AESUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,12 +20,12 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdviceAd
 /**
  * @Author: aiYunS @Date: 2022-9-13 上午 10:18 @Description: 解密请求参数类,允许获取EncryptProperties配置类
  */
-@EnableConfigurationProperties(EncryptProperties.class)
+@EnableConfigurationProperties(EncryptProperty.class)
 @ControllerAdvice
 public class DecryptRequest extends RequestBodyAdviceAdapter {
 
   private ObjectMapper om = new ObjectMapper();
-  @Autowired EncryptProperties encryptProperties;
+  @Autowired EncryptProperty encryptProperty;
 
   @Override
   public boolean supports(
@@ -44,7 +44,7 @@ public class DecryptRequest extends RequestBodyAdviceAdapter {
       Class<? extends HttpMessageConverter<?>> converterType)
       throws IOException {
     // 获取密钥的字节
-    byte[] keyByte = encryptProperties.getKey().getBytes();
+    byte[] keyByte = encryptProperty.getKey().getBytes();
     // 读取请求参数成为字节body
     byte[] body = new byte[inputMessage.getBody().available()];
     inputMessage.getBody().read(body);

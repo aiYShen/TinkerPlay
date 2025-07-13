@@ -138,7 +138,7 @@ spring:
       # 文件写入磁盘的阈值，默认为0
       file-size-threshold: 0
       # 上传文件的临时保存位置
-      location: /Test/Temp
+      location: /Users/yuxinbai/aiyun/Test/Temp
       # 上传的单个文件的最大大小，默认为1MB
       max-file-size: 50MB
       # 多文件上传时文件的总大小，默认为10MB
@@ -243,7 +243,7 @@ body:
     key: iamwalkerencrypt
     
 # 文件上传位置
-file-save-path: /Test/uploadFile/
+file-save-path: /Users/yuxinbai/aiyun/Test/uploadFile/
 
 mybatis:
   #映射的xml的sql文件路径
@@ -264,9 +264,9 @@ logging:
 pdf:
   config:
     # pdf模板路径
-    templatePath: /templates/test输出pdf模板.pdf
+    templatePath: /Users/yuxinbai/aiyun/TinkerPlay/general/src/main/resources/templates/test输出pdf模板.pdf
     # pdf输出位置
-    output: /Test/uploadFile/pdf/
+    output: /Users/yuxinbai/aiyun/Test/uploadFile/pdf/
     # 字体路径
     fontPath: /templates/fonts/simsun.ttf
 

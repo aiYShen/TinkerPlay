@@ -1,6 +1,6 @@
 package com.aiyuns.tinkerplay.Entity;
 
-import com.aiyuns.tinkerplay.Config.Properties.DateConverterProperties;
+import com.aiyuns.tinkerplay.Config.Properties.DateConverterProperty;
 import com.aiyuns.tinkerplay.CustomAnnotations.PrivacyEncrypt;
 import com.aiyuns.tinkerplay.Enum.PrivacyTypeEnum;
 import com.alibaba.excel.annotation.ExcelProperty;
@@ -49,7 +49,7 @@ public class User implements Serializable {
   @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   // @ExcelIgnore  //解决Date转换出现的NoSuchMethodError异常 过略该类型的属性不导出
-  @ExcelProperty(value = "出生年月日", converter = DateConverterProperties.class)
+  @ExcelProperty(value = "出生年月日", converter = DateConverterProperty.class)
   @Schema(description = "出生年月日")
   private Date birthday;
 

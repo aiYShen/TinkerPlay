@@ -1,6 +1,6 @@
 package com.aiyuns.tinkerplay.DecryptAndEncry;
 
-import com.aiyuns.tinkerplay.Config.Properties.EncryptProperties;
+import com.aiyuns.tinkerplay.Config.Properties.EncryptProperty;
 import com.aiyuns.tinkerplay.CustomAnnotations.Encrypt;
 import com.aiyuns.tinkerplay.Entity.R;
 import com.aiyuns.tinkerplay.Utils.AESUtil;
@@ -18,11 +18,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 /**
  * @Author: aiYunS @Date: 2022-9-25 上午 11:20 @Description: 加密返回结果类
  */
-@EnableConfigurationProperties(EncryptProperties.class) // 开启ControllerAdvice
+@EnableConfigurationProperties(EncryptProperty.class) // 开启ControllerAdvice
 @ControllerAdvice // 实现ResponseBodyAdvice
 public class EncrptResponse implements ResponseBodyAdvice<R> {
 
-  @Autowired private EncryptProperties encryptProperties;
+  @Autowired private EncryptProperty encryptProperty;
 
   // 用来Object对象的转换
   private ObjectMapper om = new ObjectMapper();
@@ -44,7 +44,7 @@ public class EncrptResponse implements ResponseBodyAdvice<R> {
       ServerHttpRequest serverHttpRequest,
       ServerHttpResponse serverHttpResponse) {
     // 获取key的字节
-    byte[] keybytes = encryptProperties.getKey().getBytes();
+    byte[] keybytes = encryptProperty.getKey().getBytes();
     // 如果msg和data存在的话，则进行加密，最后进行返回
     try {
       if (r.getMsg() != null) {
