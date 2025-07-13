@@ -5,7 +5,7 @@ import cn.hutool.json.JSONUtil;
 import com.aiyuns.tinkerplay.Common.CommonResult;
 import com.aiyuns.tinkerplay.Common.MinioUploadDto;
 import com.aiyuns.tinkerplay.Config.MinioClientConfig;
-import com.aiyuns.tinkerplay.Config.Properties.BucketPolicyConfigDto;
+import com.aiyuns.tinkerplay.Config.Properties.BucketPolicyConfigProperty;
 import com.aiyuns.tinkerplay.Controller.Service.UserFileService;
 import com.aiyuns.tinkerplay.Controller.Service.UserService;
 import com.aiyuns.tinkerplay.Entity.QueryRequestVo;
@@ -161,7 +161,7 @@ public class FileUploadOrDownloadController {
       } else {
         // 创建存储桶并设置只读权限
         minioClient.makeBucket(MakeBucketArgs.builder().bucket(BUCKET_NAME).build());
-        BucketPolicyConfigDto bucketPolicyConfigDto = createBucketPolicyConfigDto(BUCKET_NAME);
+          BucketPolicyConfigProperty bucketPolicyConfigDto = createBucketPolicyConfigProperty(BUCKET_NAME);
         SetBucketPolicyArgs setBucketPolicyArgs =
             SetBucketPolicyArgs.builder()
                 .bucket(BUCKET_NAME)
@@ -215,15 +215,15 @@ public class FileUploadOrDownloadController {
   }
 
   /** 创建存储桶的访问策略，设置为只读权限 */
-  private BucketPolicyConfigDto createBucketPolicyConfigDto(String bucketName) {
-    BucketPolicyConfigDto.Statement statement =
-        BucketPolicyConfigDto.Statement.builder()
+  private BucketPolicyConfigProperty createBucketPolicyConfigProperty(String bucketName) {
+      BucketPolicyConfigProperty.Statement statement =
+              BucketPolicyConfigProperty.Statement.builder()
             .Effect("Allow")
             .Principal("*")
             .Action("s3:GetObject")
             .Resource("arn:aws:s3:::" + bucketName + "/*.**")
             .build();
-    return BucketPolicyConfigDto.builder()
+    return BucketPolicyConfigProperty.builder()
         .Version("2012-10-17")
         .Statement(CollUtil.toList(statement))
         .build();
