@@ -27,7 +27,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.0-M1</junit.version>
         <javacv.version>1.5.5</javacv.version>
-        <djl.version>0.33.0</djl.version>
+        <djl.version>0.34.0</djl.version>
     </properties>
 
     <repositories>
@@ -43,9 +43,6 @@
                 <updatePolicy>daily</updatePolicy>  <!-- Optional, update daily -->
             </snapshots>
         </repository>
-
-
-
     </repositories>
 
     <dependencies>
@@ -189,7 +186,6 @@
     <!-- Maven Enforcer: Ensures user has an up to date version of Maven before building -->
     <build>
         <plugins>
-
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
