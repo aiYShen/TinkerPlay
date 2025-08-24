@@ -4,7 +4,7 @@
 从系统设计规划-->编码开发-->测试调试-->规划部署-->运维支持-->程序调优-->迭代改进的一体化角度出发! 学习、温习、记录工作生活中遇到的常规性需求解决思路和案例、集成各种中间件的思路和案例、各种处理策略、算法基础、设计模式基础、测试知识点的代码库.
 
 #### 架构
-JAVA_21 + springboot_3.4.8 + mybatis_3.5.19 + redis_7.0.9 + rabbitmq_3.11.10 + ELK_7.17.3 等, maven_3.9.10 构建
+JAVA_21 + springboot_3.4.9 + mybatis_3.5.19 + redis_7.0.9 + rabbitmq_3.11.10 + ELK_7.17.3 等, maven_3.9.10 构建
 
 
 #### 配置文件application.yml说明
@@ -103,7 +103,7 @@ JAVA_21 + springboot_3.4.8 + mybatis_3.5.19 + redis_7.0.9 + rabbitmq_3.11.10 + E
 53. 程序加载词向量模型, 判断汉语语句相似度Demo
 54. 尝试玩下地理信息相关的Java开源包及前端开发包(com.esri.arcgisruntim, org.geotools, org.gdal, org.locationtech.jts, JavaFX)
 55. 优化项目结构:模块化-新增flink- job模块, 方便单独打包
-56. Spring Ai 1.0.0正式版发布,尝试集成并学习使用它
+56. Spring Ai 1.0.1发布,尝试集成并学习使用它
 57. 开发风格以后遵循Google的Java编码规范
 58. ..............................
 

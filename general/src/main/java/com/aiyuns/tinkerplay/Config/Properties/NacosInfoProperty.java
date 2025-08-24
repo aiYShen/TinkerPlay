@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = NacosInfoProperty.PREFIX)
 public class NacosInfoProperty {
 
-  public static final String PREFIX = "config";
+  public static final String PREFIX = "nacos-config";
 
   private String info;
 
