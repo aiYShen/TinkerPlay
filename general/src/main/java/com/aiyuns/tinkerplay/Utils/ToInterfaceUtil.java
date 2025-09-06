@@ -8,14 +8,16 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @Author: aiYunS @Date: 2022-9-23 下午 08:57 @Description: 请求其他接口工具类
  */
 public class ToInterfaceUtil {
   /** 调测日志记录器。 */
-  private static final Logger DEBUGGER = Logger.getLogger(UserController.class);
+  private static final Logger DEBUGGER = LogManager.getLogger(UserController.class);
 
   /**
    * 调用对方接口方法
