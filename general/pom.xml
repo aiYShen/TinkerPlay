@@ -230,7 +230,7 @@
     <dependency>
       <groupId>cn.hutool</groupId>
       <artifactId>hutool-all</artifactId>
-      <version>5.8.40</version>
+      <version>5.8.41</version>
     </dependency>
     <!-- 文件上传 储存桶 -->
     <dependency>
