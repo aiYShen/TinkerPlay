@@ -7,7 +7,7 @@
 
 #### 架构
 
-JAVA_21 + springboot_3.4.10 + mybatis_3.5.19 + redis_7.0.9 + rabbitmq_3.11.10 + ELK_7.17.3 等,
+JAVA_21 + springboot_3.4.11 + mybatis_3.5.19 + redis_7.0.9 + rabbitmq_3.11.10 + ELK_7.17.3 等,
 maven_3.9.11 构建
 
 #### 配置文件application.yml说明
@@ -118,6 +118,7 @@ maven_3.9.11 构建
 
 Linux:
 docker部署:
+
 1. nacos_v2.1.0 配置中心
 2. redis_v7.0.9 缓存数据库
 3. harbor_v1.10.10 私有镜像仓库
@@ -129,12 +130,12 @@ docker部署:
 9. zookeeper_v3.8.1 集中式服务
 10. clickhouse_v24.8.4.13 数据库
 11. mysql_v8.0.32 数据库
-普通部署:
+    普通部署:
 12. flink_v1.17.0 分布式处理框架
-Windows:
+    Windows:
 13. minio对象存储桶
 14. mysql_v8.0.11 数据库
-Mac:
+    Mac:
 15. clickhouse_v24.8.4.13 数据库
 16. mysql_v8.0.36 数据库
 17. flink_v1.20.0 分布式处理框架
