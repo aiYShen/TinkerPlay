@@ -230,7 +230,7 @@
     <dependency>
       <groupId>cn.hutool</groupId>
       <artifactId>hutool-all</artifactId>
-      <version>5.8.41</version>
+      <version>5.8.42</version>
     </dependency>
     <!-- 文件上传 储存桶 -->
     <dependency>
@@ -864,7 +864,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.3.1</version>
+        <version>3.4.0</version>
         <configuration>
           <propertiesEncoding>UTF-8</propertiesEncoding>
           <nonFilteredFileExtensions>
