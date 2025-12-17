@@ -27,7 +27,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>5.8.0-M1</junit.version>
     <javacv.version>1.5.5</javacv.version>
-    <djl.version>0.35.1</djl.version>
+    <djl.version>0.36.0</djl.version>
   </properties>
 
   <repositories>
