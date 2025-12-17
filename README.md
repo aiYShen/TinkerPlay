@@ -8,7 +8,7 @@
 #### 架构
 
 JAVA_21 + springboot_3.4.12 + mybatis_3.5.19 + redis_7.0.9 + rabbitmq_3.11.10 + ELK_7.17.3 等,
-maven_3.9.11 构建
+Apache Maven Daemon (mvnd) 1.0.3 darwin-aarch64 构建
 
 #### 配置文件application.yml说明
 
