@@ -511,7 +511,7 @@
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
-      <version>4.3.1</version>
+      <version>4.5.0</version>
     </dependency>
     <!-- 德鲁伊数据连接池 -->
     <dependency>
