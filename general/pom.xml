@@ -781,7 +781,7 @@
               <!--定义镜像构建行为-->
               <build>
                 <!--定义基础镜像-->
-                <from>openjdk:21</from>
+                <from>openjdk:25</from>
                 <!--定义维护者-->
                 <maintainer>aiYunS</maintainer>
                 <args>
@@ -900,7 +900,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <release>21</release>
+          <release>25</release>
           <compilerArgs>--enable-preview</compilerArgs>
           <!-- 跳过安全检查 -->
           <!--                <skip>true</skip>-->

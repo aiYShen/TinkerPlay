@@ -7,7 +7,7 @@
 
 #### 架构
 
-JAVA_21 + springboot_3.4.13 + mybatis_4.0.1 + redis_7.0.9 + rabbitmq_3.11.10 + ELK_7.17.3 等,
+JAVA_25 + springboot_3.4.13 + mybatis_4.0.1 + redis_7.0.9 + rabbitmq_3.11.10 + ELK_7.17.3 等,
 Apache Maven Daemon (mvnd) 1.0.3 构建
 
 #### 配置文件application.yml说明
