@@ -113,7 +113,7 @@
     <dependency>
       <groupId>org.apache.calcite</groupId>
       <artifactId>calcite-core</artifactId>
-      <version>1.39.0</version>
+      <version>1.42.0</version>
     </dependency>
     <!-- 判断编码格式 -->
     <dependency>
