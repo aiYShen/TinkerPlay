@@ -2,13 +2,14 @@
 
 #### 介绍
 
-从系统设计规划-->编码开发-->测试调试-->规划部署-->运维支持-->程序调优-->迭代改进的一体化角度出发!
-学习、温习、记录工作生活中遇到的常规性需求解决思路和案例、集成各种中间件的思路和案例、各种处理策略、算法基础、设计模式基础、测试知识点的代码库.
+从系统设计规划 --> 编码开发 --> 测试调试 --> 规划部署 --> 运维支持 --> 程序调优 -->
+迭代改进的一体化角度出发!
+学习、温习、记录工作和生活中遇到的常规性需求解决思路和案例、集成各种中间件的思路和案例、各种处理策略、算法基础、设计模式基础、测试知识点的代码库.
 
 #### 架构
 
-JAVA_25 + springboot_3.4.13 + mybatis_4.0.1 + redis_7.0.9 + rabbitmq_3.11.10 + ELK_7.17.3 等,
-Apache Maven Daemon (mvnd) 1.0.3 构建
+JAVA_21版本及以上 + springboot_3.4.13版本及以上 + mybatis_4.0.1版本及以上 + redis_7.0.9版本及以上 +
+rabbitmq_3.11.10版本及以上 + ELK_7.17.3 等, Apache Maven Daemon (mvnd) 1.0.3版本及以上 构建
 
 #### 配置文件application.yml说明
 
@@ -46,16 +47,9 @@ Apache Maven Daemon (mvnd) 1.0.3 构建
 15. 文件上传,支持多文件上传
 16. 自定义定时任务功能,Springboot自带定时任务注解等
 17. 熟悉学习基础算法,收集网络上大佬们的算法:
-    一. 递归算法及其案例: 文件递归搜索
-    二. 冒泡排序
-    三. 分页算法
-    .....
+    一. 递归算法及其案例: 文件递归搜索 二. 冒泡排序 三. 分页算法 .....
 18. 模拟数据结构:
-    一. 堆栈数据结构
-    二. 二叉树数据结构
-    三. 红黑树数据结构
-    四. BTree
-    .....
+    一. 堆栈数据结构 二. 二叉树数据结构 三. 红黑树数据结构 四. BTree .....
 19. 集成Flyway,及其配置类 自动升级数据库脚本
 20. 集成swagger,及其配置类
 21. Java爬虫,爬取页面
@@ -72,7 +66,7 @@ Apache Maven Daemon (mvnd) 1.0.3 构建
 32. yml配置文件敏感信息加密
 33. 梳理一健打包项目为镜像到Linux自建镜像仓库
 34. 集成整合ELK,实现基本使用
-35. 集成第三方开源的ChatGPT包,封装一下玩一下(ChatGPT账号访问api权限已不足)
+35. 集成第三方开源的ChatGPT包,封装一下玩一下 (ChatGPT账号访问api权限已不足)
 36. 集成Nacos配置中心使用
 37. 玩一下Flink
 38. 非阻塞IO-NIO对比传统IO
@@ -84,30 +78,21 @@ Apache Maven Daemon (mvnd) 1.0.3 构建
 44. 完善日志配置: 日志输出格式,日志分割规则,日志常规配置等
 45. 测试git提交
 46. 框架版本全面升级:JAVA_1.8 + springboot_2.7.5 + mybatis_3.4.6 + redis_7.0.9 + rabbitmq_3.11.10 +
-    ELK_7.17.3 等,maven_3.8.4构建
-    到 JAVA_20 + springboot_3.2.0 + mybatis_3.5.15 + redis_7.0.9 + rabbitmq_3.11.10 + ELK_7.17.3
-    等,maven_3.9.6构建
+    ELK_7.17.3 等,maven_3.8.4构建 到 JAVA_20 + springboot_3.2.0 + mybatis_3.5.15 + redis_7.0.9 +
+    rabbitmq_3.11.10 + ELK_7.17.3 等,maven_3.9.6构建
 47. 排查整体结构中存在的问题并解决
 48. 解决集成flyway自定义的数据源bean会覆盖baomidou的数据源bean,导致多数据源不生效的问题
 49. JDK20 升级到 JDK21
-50. 开启JDK21的ZGC日志记录(--add-opens
-    java.base/java.util=ALL-UNNAMED
-    -Xms100M
-    -Xmx2G
-    -XX:ReservedCodeCacheSize=64m
-    -XX:InitialCodeCacheSize=32m
-    -XX:+UseZGC
-    -XX:ConcGCThreads=2
-    -XX:ParallelGCThreads=3
-    -XX:ZCollectionInterval=60
-    -XX:ZAllocationSpikeTolerance=2
-    -Xlog:safepoint,classhisto*=trace,age*,gc*=info:file=E:
+50. 开启JDK21的ZGC日志记录 (--add-opens java.base/java.util=ALL-UNNAMED -Xms100M -Xmx2G -XX:
+    ReservedCodeCacheSize=64m -XX:InitialCodeCacheSize=32m -XX:+UseZGC -XX:ConcGCThreads=2 -XX:
+    ParallelGCThreads=3 -XX:ZCollectionInterval=60 -XX:ZAllocationSpikeTolerance=2 -Xlog:
+    safepoint,classhisto*=trace,age*,gc*=info:file=E:
     \aiyuns\TinkerPlay\logs\TinkerPlay\gc-%t.log:time,tid,tags:filecount=5,filesize=50m),
     尝试调优!!!
 51. 现有功能全部适配SpringBoot_3.2.0版本,测试并发现问题及处理
 52. 配合拦截器,实现限流的基本思路和原理
 53. 程序加载词向量模型, 判断汉语语句相似度Demo
-54. 尝试玩下地理信息相关的Java开源包及前端开发包(com.esri.arcgisruntim, org.geotools, org.gdal,
+54. 尝试玩下地理信息相关的Java开源包及前端开发包 (com.esri.arcgisruntim, org.geotools, org.gdal,
     org.locationtech.jts, JavaFX)
 55. 优化项目结构:模块化-新增flink- job模块, 方便单独打包
 56. Spring Ai 1.0.1发布,尝试集成并学习使用它
@@ -116,8 +101,7 @@ Apache Maven Daemon (mvnd) 1.0.3 构建
 
 #### 部署内容
 
-Linux:
-docker部署:
+Linux - docker部署:
 
 1. nacos_v2.1.0 配置中心
 2. redis_v7.0.9 缓存数据库
@@ -129,13 +113,10 @@ docker部署:
 8. kafka_v2.8.1 分布式事件流平台
 9. zookeeper_v3.8.1 集中式服务
 10. clickhouse_v24.8.4.13 数据库
-11. mysql_v8.0.32 数据库
-    普通部署:
-12. flink_v1.17.0 分布式处理框架
-    Windows:
+11. mysql_v8.0.32 数据库 普通部署:
+12. flink_v1.17.0 分布式处理框架 Windows:
 13. minio对象存储桶
-14. mysql_v8.0.11 数据库
-    Mac:
+14. mysql_v8.0.11 数据库 Mac:
 15. clickhouse_v24.8.4.13 数据库
 16. mysql_v8.0.36 数据库
 17. flink_v1.20.0 分布式处理框架
