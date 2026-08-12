@@ -505,7 +505,7 @@
     <dependency>
       <groupId>org.springframework.amqp</groupId>
       <artifactId>spring-amqp</artifactId>
-      <version>3.2.5</version>
+      <version>3.2.11</version>
     </dependency>
     <!-- 配置多数据源的包 -->
     <dependency>
